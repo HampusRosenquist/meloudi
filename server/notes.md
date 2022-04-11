@@ -5,3 +5,10 @@ sudo systemctl start postgresql
 ### Enter CLI
 sudo -i -u postgres
 psql
+
+# Django
+
+### Migrations
+python manage.py makemigrations music
+(python manage.py sqlmigrate music 0001)
+python manage.py migrate

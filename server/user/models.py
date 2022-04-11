@@ -4,6 +4,9 @@ class User(models.Model):
     username = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.username
+
 class Playlist(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -13,3 +16,6 @@ class Playlist(models.Model):
     minutes = models.PositiveSmallIntegerField()
     amount = models.PositiveSmallIntegerField()
     date = models.DateField()
+
+    def __str__(self):
+        return self.title
