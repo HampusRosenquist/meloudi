@@ -8,6 +8,6 @@ For lyrics I may use [python-LyricsGenius](https://lyricsgenius.readthedocs.io/e
 Angular 13
 
 ### Server
-Django
+Django as a REST API
 PostgreSQL
 [Auth0](https://auth0.com/)
