@@ -17,7 +17,7 @@ class Album(models.Model):
     year = models.PositiveSmallIntegerField(default=1)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Song(models.Model):
     title = models.CharField(max_length=100)
@@ -27,4 +27,4 @@ class Song(models.Model):
     index = models.PositiveSmallIntegerField(default=1)
 
     def __str__(self):
-        return self.name
+        return self.title
