@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
-import { songs } from './datatypes'
+import { songs } from './types/music'
 
 @Component({
   selector: 'app-root',

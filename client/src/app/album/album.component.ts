@@ -1,33 +1,62 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
-import { albums, songs } from '../datatypes';
+import { Artist, Album, Song } from '../types/music';
+import { RestService } from '../services/rest.service';
+import { Rest } from '../types/rest';
 
 @Component({
     selector: 'app-album',
     templateUrl: './album.component.html',
     styleUrls: ['./album.component.css']
 })
-export class AlbumComponent {
-    albums = albums;
-    songs = songs;
-    artists = ['Radiohead', 'Sting', 'Mazzy Star', 'Post Malone'];
-    chosenAlbums = albums;
-    chosenSongs = songs;
+export class AlbumComponent implements OnInit{
+    artists: Artist[] = [];
+    albums: Album[] = [];
+    songs: Song[] = [];
+    chosenAlbums: Album[] = [];
+    chosenSongs: Song[] = [];
     chosenSong = new Audio("../assets/song.opus");
 
     @Output() isPlaying = new EventEmitter<boolean>();
 
+    ngOnInit(): void {
+        this.loadArtists();
+        this.loadAlbums();
+        this.loadSongs();
+    }
+
+    constructor(public restService: RestService) { }
+
     chooseArtist(artist: string) {
-        this.chosenAlbums = this.albums.filter(album => album.artist === artist);
-        this.chosenSongs = this.songs.filter(song => song.artist === artist);
+        this.chosenAlbums = this.albums.filter(album => album.artist_name === artist);
+        this.chosenSongs = this.songs.filter(song => song.artist_name === artist);
     }
 
     chooseAlbum(album: string) {
-        this.chosenSongs = this.songs.filter(song => song.album === album);
+        this.chosenSongs = this.songs.filter(song => song.album_name === album);
     }
 
     playSong(song: string) {
         this.isPlaying.emit(true);
-        
+    }
+
+    loadArtists() {
+        return this.restService.getArtists().subscribe((data: Rest) => {
+            this.artists = data.results;
+        })
+    }
+
+    loadAlbums() {
+        return this.restService.getAlbums().subscribe((data: Rest) => {
+            this.albums = data.results;
+            this.chosenAlbums = data.results;
+        })
+    }
+
+    loadSongs() {
+        return this.restService.getSongs().subscribe((data: Rest) => {
+            this.songs = data.results;
+            this.chosenSongs = data.results;
+        })
     }
 }
