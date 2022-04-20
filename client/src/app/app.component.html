@@ -1,20 +1,37 @@
 <mat-toolbar color="primary">
   <span>Meloudi</span>
-  <button mat-icon-button><span class="material-icons">skip_previous</span></button>
-  <button mat-icon-button (click)="toggleIsPlaying()"><span class="material-icons" *ngIf="isPlaying">pause</span><span class="material-icons" *ngIf="!isPlaying">play_arrow</span></button>
-  <button mat-icon-button><span class="material-icons">skip_next</span></button>
-  <button mat-icon-button (click)="stop()"><span class="material-icons">stop</span></button>
-  <button mat-icon-button><span class="material-icons">shuffle</span></button>
-  <button mat-icon-button><span class="material-icons">replay</span></button>
+  <button mat-icon-button>
+    <span class="material-icons">skip_previous</span>
+  </button>
+  <button mat-icon-button (click)="toggleIsPlaying()">
+    <span class="material-icons" *ngIf="isPlaying">pause</span>
+    <span class="material-icons" *ngIf="!isPlaying">play_arrow</span>
+  </button>
+  <button mat-icon-button>
+    <span class="material-icons">skip_next</span>
+  </button>
+  <button mat-icon-button (click)="stop()">
+    <span class="material-icons">stop</span>
+  </button>
+  <button mat-icon-button>
+    <span class="material-icons">shuffle</span>
+  </button>
+  <button mat-icon-button>
+    <span class="material-icons">replay</span>
+  </button>
+  <mat-slider min="0" max="100" value="100" aria-label="Audio level" (input)="adjustVolume($event)"></mat-slider>
+
   <span class="flexExpand"></span>
-  <button mat-button routerLink="/albums" routerLinkActive="active">Album</button>
-  <button mat-button routerLink="/playlists" routerLinkActive="active">Spellistor</button>
+
+  <button mat-button (click)="viewAlbums()">Album</button>
+  <button mat-button (click)="viewPlaylists()">Spellistor</button>
   <button mat-button>Vänner</button>
   <button mat-button>Profil</button>
 </mat-toolbar>
 
 <div class="content" role="main"></div>
 
-<!--<app-album [isPlaying]="isPlaying"></app-album>-->
+<app-album *ngIf="showAlbums" (isPlaying)="setIsPlaying($event)"></app-album>
+<app-playlists *ngIf="showPlaylists"></app-playlists>
 
 <router-outlet></router-outlet>
