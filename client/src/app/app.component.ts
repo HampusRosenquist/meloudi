@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
+import { songs } from './datatypes'
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { MatSliderChange } from '@angular/material/slider';
 export class AppComponent {
   title = 'Meloudi';
   isPlaying = false;
-  chosenSong = new Audio("../assets/song.opus");
+  audioFile = new Audio("../assets/song.opus");
+  song = songs[0];
   showAlbums = true;
   showPlaylists = false;
 
@@ -24,9 +26,9 @@ export class AppComponent {
 
   applyPlayingState() {
     if (this.isPlaying) {
-        this.chosenSong.play();
+        this.audioFile.play();
     } else {
-      this.chosenSong.pause();
+      this.audioFile.pause();
     }
   }
 
@@ -42,12 +44,18 @@ export class AppComponent {
 
   stop() {
     this.setIsPlaying(false);
-    this.chosenSong = new Audio("../assets/song.opus");
+    this.audioFile = new Audio("../assets/song.opus");
   }
 
   adjustVolume(event: MatSliderChange) {
     if (event.value != null) {
-      this.chosenSong.volume = event.value / 100;
+      this.audioFile.volume = event.value / 100;
+    }
+  }
+
+  adjustPlaybackPosition(event: MatSliderChange) {
+    if (event.value != null) {
+      this.audioFile.currentTime = event.value;
     }
   }
 }
