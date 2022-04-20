@@ -3,6 +3,14 @@
     text-align: left;
 }
 
+.song {
+    width: 25em;
+}
+
+.listTitle {
+    text-align: center;
+}
+
 .flex-container {
     display: flex;
   }

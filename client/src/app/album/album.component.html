@@ -1,39 +1,44 @@
 
 <div class="flex-container">
     <div>
-        <h2>Artists</h2>
         <mat-list>
+            <h2 class="listTitle">Artists</h2>
             <mat-list-item *ngFor="let artist of artists">
                 <button
-                mat-stroked-button class="album"
+                mat-stroked-button
+                class="album"
                 (click)="chooseArtist(artist)">
-                {{ artist }}
+                <p>{{ artist }}</p>
                 </button>
             </mat-list-item>
         </mat-list>
     </div>
 
     <div>
-        <h2>Albums</h2>
         <mat-list>
+            <h2 class="listTitle">Albums</h2>
             <mat-list-item *ngFor="let album of chosenAlbums">
                 <button
-                mat-stroked-button class="album"
+                mat-stroked-button
+                class="album"
                 (click)="chooseAlbum(album.title)">
-                {{ album.title }}
+                <p>{{ album.title }}</p>
                 </button>
             </mat-list-item>
         </mat-list>
     </div>
-
+    
     <div>
-        <h2>Songs</h2>
         <mat-list>
+            <h2 class="listTitle">Songs</h2>
             <mat-list-item *ngFor="let song of chosenSongs">
                 <button
-                mat-stroked-button class="album"
+                mat-stroked-button
+                class="song"
                 (click)="playSong(song.title)">
-                {{ song.index }}. {{ song.title }}
+                <p style="float: left">{{ song.index }}. {{ song.title }}</p>
+                <span class="flexExpand"></span>
+                <p style="float: right">{{ song.seconds }}</p>
                 </button>
             </mat-list-item>
         </mat-list>
