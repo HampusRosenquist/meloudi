@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client';
+  title = 'Meloudi';
+  isPlaying = false;
+
+  toggleIsPlaying() {
+    this.isPlaying = !this.isPlaying;
+  }
+
+  stop() {
+    this.isPlaying = false;
+  }
 }

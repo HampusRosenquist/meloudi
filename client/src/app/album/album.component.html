@@ -1,0 +1,29 @@
+
+<div class="flex-container">
+    <div>
+        <h2>Artists</h2>
+        <mat-list>
+            <mat-list-item *ngFor="let artist of artists">
+                <button mat-stroked-button class="album" (click)="chooseArtist(artist)">{{ artist }}</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div>
+        <h2>Albums</h2>
+        <mat-list>
+            <mat-list-item *ngFor="let album of chosenAlbums">
+                <button mat-stroked-button class="album" (click)="chooseAlbum(album.title)">{{ album.title }}</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div>
+        <h2>Songs</h2>
+        <mat-list>
+            <mat-list-item *ngFor="let song of chosenSongs">
+                <button mat-stroked-button class="album" (click)="playSong(song.title)">{{ song.index }}. {{ song.title }}</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

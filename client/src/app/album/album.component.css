@@ -1,0 +1,8 @@
+.album {
+    width: 15em;
+    text-align: left;
+}
+
+.flex-container {
+    display: flex;
+  }
