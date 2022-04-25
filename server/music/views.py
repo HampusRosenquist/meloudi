@@ -3,8 +3,19 @@ from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from music import serializers, models
 
-def index(resquest):
+def index(request):
     return HttpResponse("User view.")
+
+def download(request):
+    f = request.GET.get('f', '')
+    filename = f.replace('..', '').replace('/', '')
+    filepath = '/home/hampus/' + filename
+    file = open(filepath, 'rb')
+
+    return HttpResponse(file, headers={
+        'Content-Type': 'audio/mpeg',
+        'Content-Disposition': 'attachment; filename=' + filename
+        })
 
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = models.Artist.objects.all().order_by('name')

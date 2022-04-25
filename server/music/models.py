@@ -34,6 +34,7 @@ class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     seconds = models.PositiveSmallIntegerField()
     index = models.PositiveSmallIntegerField(default=1)
+    file = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title

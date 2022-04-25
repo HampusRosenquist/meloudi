@@ -15,9 +15,9 @@ export class AlbumComponent implements OnInit{
     songs: Song[] = [];
     chosenAlbums: Album[] = [];
     chosenSongs: Song[] = [];
-    chosenSong = new Audio("../assets/song.opus");
 
     @Output() isPlaying = new EventEmitter<boolean>();
+    @Output() chosenSong = new EventEmitter<Song>();
 
     ngOnInit(): void {
         this.loadArtists();
@@ -36,8 +36,9 @@ export class AlbumComponent implements OnInit{
         this.chosenSongs = this.songs.filter(song => song.album_name === album);
     }
 
-    playSong(song: string) {
-        this.isPlaying.emit(true);
+    playSong(song: Song) {
+        //this.isPlaying.emit(true);
+        this.chosenSong.emit(song);
     }
 
     loadArtists() {

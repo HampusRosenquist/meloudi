@@ -1,3 +1,6 @@
+# Assets
+client/src/assets/
+
 # Django #
 *.log
 *.pot

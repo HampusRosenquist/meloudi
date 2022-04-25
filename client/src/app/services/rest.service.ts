@@ -9,7 +9,7 @@ import { Rest } from '../types/rest'
   providedIn: 'root'
 })
 export class RestService {
-  baseurl = 'http://localhost:8000';
+  baseurl = 'http://192.168.1.46:8000';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -35,6 +35,7 @@ export class RestService {
       .get<Rest>(this.baseurl + '/song/')
       .pipe(retry(1), catchError(this.errorHandl));
   }
+
 
   errorHandl(error: any) {
     let errorMessage = '';
