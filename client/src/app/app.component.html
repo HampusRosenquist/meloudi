@@ -54,7 +54,14 @@
 
 <div class="content" role="main"></div>
 
-<app-album *ngIf="showAlbums" (chosenSong)="chooseSong($event)"></app-album>
-<app-playlists *ngIf="showPlaylists"></app-playlists>
+<app-album
+  *ngIf="showAlbums"
+  (chosenSong)="chooseSong($event)">
+</app-album>
+
+<app-playlists
+  *ngIf="showPlaylists"
+  (chosenSong)="chooseSong($event)">
+</app-playlists>
 
 <!--<router-outlet></router-outlet>-->

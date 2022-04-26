@@ -1,0 +1,20 @@
+.playlist {
+    width: 15em;
+    text-align: left;
+}
+
+.song {
+    width: 25em;
+}
+
+.listTitle {
+    text-align: center;
+}
+
+.playlist-card {
+    max-width: 200px;
+}
+
+.flex-container {
+    display: flex;
+  }

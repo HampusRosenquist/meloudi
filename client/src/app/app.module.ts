@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,8 @@ import { RestService } from './services/rest.service';
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

@@ -36,6 +36,12 @@ export class RestService {
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
+  getPlaylists(): Observable<Rest> {
+    return this.http
+      .get<Rest>(this.baseurl + '/playlists/')
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
 
   errorHandl(error: any) {
     let errorMessage = '';

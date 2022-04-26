@@ -1,1 +1,41 @@
-<p>playlists works!</p>
+
+<div class="flex-container">
+    <div>
+        <mat-list>
+            <h2 class="listTitle">Playlists</h2>
+            <mat-list-item *ngFor="let playlist of playlists">
+                <button
+                mat-stroked-button
+                class="playlist"
+                (click)="choosePlaylist(playlist)">
+                <p>{{ playlist.title }}</p>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div *ngIf="chosenSongs.length != 0">
+        <mat-list>
+            <h2 class="listTitle">Songs</h2>
+            <mat-list-item *ngFor="let song of chosenSongs">
+                <button
+                mat-stroked-button
+                class="song"
+                (click)="playSong(song)">
+                <p>{{ song.title }} - {{ song.artist_name }}</p>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div *ngIf="chosenSongs.length != 0">
+        <mat-card class="playlist-card">
+            <mat-card-header>
+                <mat-card-title>{{ chosenPlaylist.title }}</mat-card-title>
+                <mat-card-subtitle>{{ chosenPlaylist.amount }} songs - {{ chosenPlaylist.minutes }} min</mat-card-subtitle>
+                <mat-card-subtitle>By {{ chosenPlaylist.owner_name }} on {{ chosenPlaylist.date }}</mat-card-subtitle>
+                <mat-card-subtitle><p>{{ chosenPlaylist.description }}</p></mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>

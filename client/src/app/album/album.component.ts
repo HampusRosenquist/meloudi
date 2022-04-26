@@ -36,7 +36,6 @@ export class AlbumComponent implements OnInit{
     }
 
     playSong(song: Song) {
-        //this.isPlaying.emit(true);
         this.chosenSong.emit(song);
     }
 
