@@ -11,8 +11,8 @@ export class AppComponent {
   title = 'Meloudi';
   isPlaying = false;
   song = <Song>{};
-  songsPath = '../assets/'
-  audioFile = new Audio(this.songsPath + 'exitmusic.opus');
+  songsPath = "./assets/"
+  audioFile = new Audio(this.songsPath + "song.opus");
   showAlbums = true;
   showPlaylists = false;
   volume = 100;
@@ -28,8 +28,8 @@ export class AppComponent {
 
   applyPlayingState() {
     if (this.isPlaying) {
-        this.audioFile.volume = this.volume;
         this.audioFile.play();
+        this.audioFile.volume = this.volume;
     } else {
       this.audioFile.pause();
     }
@@ -54,7 +54,7 @@ export class AppComponent {
 
   stop() {
     this.setIsPlaying(false);
-    this.audioFile = new Audio("../assets/song.opus");
+    this.audioFile.currentTime = 0;
   }
 
   adjustVolume(event: MatSliderChange) {

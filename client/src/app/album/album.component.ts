@@ -16,7 +16,6 @@ export class AlbumComponent implements OnInit{
     chosenAlbums: Album[] = [];
     chosenSongs: Song[] = [];
 
-    @Output() isPlaying = new EventEmitter<boolean>();
     @Output() chosenSong = new EventEmitter<Song>();
 
     ngOnInit(): void {
