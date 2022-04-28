@@ -24,7 +24,7 @@ export class PlaylistsComponent implements OnInit {
 
   choosePlaylist(playlist: Playlist) {
     this.chosenPlaylist = playlist;
-    this.chosenSongs = playlist.songs;
+    this.chosenSongs = playlist.songs_data;
   }
 
   playSong(song: Song) {
