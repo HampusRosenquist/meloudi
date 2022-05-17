@@ -15,7 +15,7 @@ export class AppComponent {
   audioFile = new Audio(this.songsPath + "song.opus");
   showAlbums = true;
   showPlaylists = false;
-  volume = 100;
+  volume = 1;
 
   viewAlbums() {
     this.showAlbums = true;

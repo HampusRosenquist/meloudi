@@ -143,6 +143,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
   'http://192.168.1.46:4200',
   'http://localhost:4200',
+  'http://127.0.0.1:4200'
 )
 
 ALLOWED_HOSTS = [

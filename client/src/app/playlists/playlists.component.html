@@ -14,7 +14,7 @@
         </mat-list>
     </div>
 
-    <div *ngIf="chosenSongs.length != 0">
+    <div *ngIf="chosenSongs.length">
         <mat-list>
             <h2 class="listTitle">Songs</h2>
             <mat-list-item *ngFor="let song of chosenSongs">
@@ -28,7 +28,7 @@
         </mat-list>
     </div>
 
-    <div *ngIf="chosenSongs.length != 0">
+    <div *ngIf="chosenSongs.length">
         <mat-card class="playlist-card">
             <mat-card-header>
                 <mat-card-title>{{ chosenPlaylist.title }}</mat-card-title>
