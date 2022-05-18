@@ -31,11 +31,32 @@
     <div *ngIf="chosenSongs.length">
         <mat-card class="playlist-card">
             <mat-card-header>
-                <mat-card-title>{{ chosenPlaylist.title }}</mat-card-title>
+                <mat-card-title>
+                    {{ chosenPlaylist.title }}
+                    <button mat-icon-button (click)="openEditDialog()">
+                        <span class="material-icons">edit_note</span>
+                    </button>
+                    <button mat-icon-button (click)="openDeleteDialog()">
+                        <span class="material-icons">delete</span>
+                    </button>
+                </mat-card-title>
                 <mat-card-subtitle>{{ chosenPlaylist.amount }} songs - {{ chosenPlaylist.minutes }} min</mat-card-subtitle>
                 <mat-card-subtitle>By {{ chosenPlaylist.owner_name }} on {{ chosenPlaylist.date }}</mat-card-subtitle>
                 <mat-card-subtitle><p>{{ chosenPlaylist.description }}</p></mat-card-subtitle>
             </mat-card-header>
+            <mat-button-toggle-group
+            name="isPublic" 
+            aria-label="Toggle public"
+            (change)="toggleIsPublic($event.value)">
+                <mat-button-toggle
+                [checked]="!chosenPlaylist.is_public" 
+                value=false>Private
+                </mat-button-toggle>
+                <mat-button-toggle
+                [checked]="chosenPlaylist.is_public"
+                value=true>Public
+                </mat-button-toggle>
+              </mat-button-toggle-group>
         </mat-card>
     </div>
 </div>

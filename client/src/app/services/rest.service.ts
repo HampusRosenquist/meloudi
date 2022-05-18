@@ -4,12 +4,19 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { Rest } from '../types/rest'
+import { Playlist } from '../types/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
-  baseurl = 'http://localhost:8000';
+  private baseUrl = 'http://localhost:8000';
+  private artistsUrl = this.baseUrl + '/artists/';
+  private songUrl = this.baseUrl + '/song/';
+  private albumUrl = this.baseUrl + '/album/';
+  private playlistsUrl = this.baseUrl + '/playlists/';
+
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,26 +27,37 @@ export class RestService {
 
   getArtists(): Observable<Rest> {
     return this.http
-      .get<Rest>(this.baseurl + '/artists/')
+      .get<Rest>(this.artistsUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
   getAlbums(): Observable<Rest> {
     return this.http
-      .get<Rest>(this.baseurl + '/album/')
+      .get<Rest>(this.albumUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
   getSongs(): Observable<Rest> {
     return this.http
-      .get<Rest>(this.baseurl + '/song/')
+      .get<Rest>(this.songUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
   getPlaylists(): Observable<Rest> {
     return this.http
-      .get<Rest>(this.baseurl + '/playlists/')
+      .get<Rest>(this.playlistsUrl)
       .pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  updatePlaylist(playlist: Playlist): Observable<Playlist> {
+    return this.http
+    .put<Playlist>(this.playlistsUrl + playlist.id + '/', playlist)
+    .pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  deletePlaylist(playlistId: number) {
+    return this.http
+      .delete(this.playlistsUrl + playlistId + '/');
   }
 
 

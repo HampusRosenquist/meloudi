@@ -1,9 +1,11 @@
 export interface Artist {
+    id: number,
     name: string,
     country: string
 }
 
 export interface Album {
+    id: number,
     title: string,
     artist: string,
     artist_name: string,
@@ -14,6 +16,7 @@ export interface Album {
 }
 
 export interface Song {
+    id: number,
     title: string,
     artist: string,
     artist_name: string,

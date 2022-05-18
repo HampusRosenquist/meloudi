@@ -1,6 +1,7 @@
 import { Song } from "./music";
 
 export interface Playlist {
+    id: number,
     owner: string,
     owner_name: string,
     title: string,
