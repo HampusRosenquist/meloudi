@@ -23,8 +23,8 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViews.UserViewSet)
 router.register(r'playlists', UserViews.PlaylistViewSet)
 router.register(r'artists', MusicViews.ArtistViewSet)
-router.register(r'album', MusicViews.AlbumViewSet)
-router.register(r'song', MusicViews.SongViewSet)
+router.register(r'albums', MusicViews.AlbumViewSet)
+router.register(r'songs', MusicViews.SongViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

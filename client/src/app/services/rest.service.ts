@@ -12,8 +12,8 @@ import { Playlist, PlaylistWrite } from '../types/user';
 export class RestService {
   private baseUrl = 'http://localhost:8000';
   private artistsUrl = this.baseUrl + '/artists/';
-  private songUrl = this.baseUrl + '/song/';
-  private albumUrl = this.baseUrl + '/album/';
+  private songUrl = this.baseUrl + '/songs/';
+  private albumUrl = this.baseUrl + '/albums/';
   private playlistsUrl = this.baseUrl + '/playlists/';
 
 
