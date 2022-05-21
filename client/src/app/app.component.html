@@ -1,5 +1,53 @@
 <mat-toolbar color="primary">
   <span>Meloudi</span>
+
+  <!--<button mat-button routerLink="/library">Library</button>
+  <button mat-button routerLink="/playlists">Playlists</button>-->
+  <button mat-button (click)="viewLibrary()">Library</button>
+  <button mat-button (click)="viewPlaylists()">Playlists</button>
+  <button mat-button>Friends</button>
+  <button mat-button>Profile</button>
+
+  <span class="flex-expand"></span>
+
+  <button mat-button>Queue</button>
+</mat-toolbar>
+
+<div class="content" role="main"></div>
+
+<app-library
+  *ngIf="showLibrary"
+  (chosenSong)="chooseSong($event)"
+  (songsOutput)="receiveSongs($event)">
+</app-library>
+
+<app-playlists
+  *ngIf="showPlaylists"
+  (chosenSong)="chooseSong($event)"
+  [songs]="songs">
+</app-playlists>
+
+
+<!--<router-outlet></router-outlet>-->
+
+<mat-toolbar class="bottom-toolbar" color="primary">
+  <span> {{ song.title }} - {{ song.artist_name }} </span>
+
+  <span class="flex-expand"></span>
+
+  <button mat-icon-button>
+    <span class="material-icons">music_note</span>
+  </button>
+  <mat-slider
+  min="0"
+  [max]="audioFile.duration"
+  [value]="audioFile.currentTime"
+  aria-label="Track position"
+  (input)="adjustPlaybackPosition($event)">
+  </mat-slider>
+
+  <span class="flex-expand"></span>
+
   <button mat-icon-button>
     <span class="material-icons">skip_previous</span>
   </button>
@@ -13,6 +61,10 @@
   <button mat-icon-button (click)="stop()">
     <span class="material-icons">stop</span>
   </button>
+
+  <span class="flex-expand"></span>
+  <span class="flex-expand"></span>
+
   <button mat-icon-button>
     <span class="material-icons">shuffle</span>
   </button>
@@ -33,37 +85,4 @@
   (input)="adjustVolume($event)">
   </mat-slider>
 
-  <span class="flexExpand"></span>
-
-  <span> {{ song.title }} - {{ song.artist_name }} </span>
-  <mat-slider
-  min="0"
-  [max]="audioFile.duration"
-  [value]="audioFile.currentTime"
-  aria-label="Track position"
-  (input)="adjustPlaybackPosition($event)">
-  </mat-slider>
-
-  <span class="flexExpand"></span>
-
-  <button mat-button (click)="viewAlbums()">Library</button>
-  <button mat-button (click)="viewPlaylists()">Playlists</button>
-  <button mat-button>Friends</button>
-  <button mat-button>Profile</button>
 </mat-toolbar>
-
-<div class="content" role="main"></div>
-
-<app-library
-  *ngIf="showLibrary"
-  (chosenSong)="chooseSong($event)"
-  (songsOutput)="receiveSongs($event)">
-</app-library>
-
-<app-playlists
-  *ngIf="showPlaylists"
-  (chosenSong)="chooseSong($event)"
-  [songs]="songs">
-</app-playlists>
-
-<!--<router-outlet></router-outlet>-->

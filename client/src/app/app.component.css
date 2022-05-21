@@ -1,3 +1,8 @@
-.flexExpand {
+.flex-expand {
     flex: 1 1 auto;
-  }
+}
+
+.bottom-toolbar {
+  position: fixed;
+  bottom: 0;
+}

@@ -18,7 +18,7 @@ export class AppComponent {
   showPlaylists = false;
   volume = 1;
 
-  viewAlbums() {
+  viewLibrary() {
     this.showLibrary = true;
     this.showPlaylists = false;
   }
