@@ -1,6 +1,9 @@
 import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogCreate } from '../dialogs/dialog-create';
+import { DialogEdit } from '../dialogs/dialog-edit';
+import { DialogEnsure } from '../dialogs/dialog-ensure';
 import { RestService } from '../services/rest.service';
 import { Song } from '../types/music';
 import { Rest } from '../types/rest';
@@ -110,59 +113,4 @@ export class PlaylistsComponent implements OnInit {
     });
   }
 
-}
-
-export interface DialogEditData {
-  title: string;
-  description: string;
-}
-
-@Component({
-  selector: 'dialog-edit',
-  templateUrl: 'dialog-edit.html',
-})
-
-export class DialogEdit {
-  constructor(
-    public dialogRef: MatDialogRef<DialogEdit>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogEditData,
-  ) {}
-
-  editForm = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required])
-  });
-
-  onSubmit(): void {
-    this.dialogRef.close(this.editForm.value);
-  }
-}
-
-
-@Component({
-  selector: 'dialog-ensure',
-  templateUrl: 'dialog-ensure.html',
-})
-export class DialogEnsure {}
-
-
-@Component({
-  selector: 'dialog-create',
-  templateUrl: 'dialog-create.html',
-})
-
-export class DialogCreate {
-  constructor(
-    public dialogRef: MatDialogRef<DialogCreate>
-  ) {}
-
-  createForm = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    isPublic: new FormControl('', [Validators.required])
-  });
-
-  onSubmit(): void {
-    this.dialogRef.close(this.createForm.value);
-  }
 }

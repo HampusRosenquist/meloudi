@@ -18,14 +18,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LibraryComponent } from './library/library.component';
-import {
-  PlaylistsComponent,
-  DialogCreate,
-  DialogEdit,
-  DialogEnsure
-} from './playlists/playlists.component'
+import { PlaylistsComponent } from './playlists/playlists.component'
 
 import { RestService } from './services/rest.service';
+
+import { DialogEdit } from './dialogs/dialog-edit';
+import { DialogEnsure } from './dialogs/dialog-ensure';
+import { DialogCreate } from './dialogs/dialog-create';
 
 @NgModule({
   declarations: [
