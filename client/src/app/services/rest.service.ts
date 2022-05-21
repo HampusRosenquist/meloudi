@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { Rest } from '../types/rest'
-import { Playlist } from '../types/user';
+import { Playlist, PlaylistWrite } from '../types/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class RestService {
   private playlistsUrl = this.baseUrl + '/playlists/';
 
 
-  httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
@@ -60,8 +60,14 @@ export class RestService {
       .delete(this.playlistsUrl + playlistId + '/');
   }
 
+  createPlaylist(playlist: PlaylistWrite): Observable<Playlist> {
+    return this.http
+      .post<Playlist>(this.playlistsUrl, playlist)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
 
-  errorHandl(error: any) {
+
+  private errorHandl(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

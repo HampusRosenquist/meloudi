@@ -1,8 +1,12 @@
-
 <div class="flex-container">
     <div>
         <mat-list>
-            <h2 class="listTitle">Playlists</h2>
+            <h2 class="listTitle">
+                Playlists
+                <button mat-icon-button (click)="openNewPlaylistDialog()">
+                    <span class="material-icons">add</span>
+                </button>
+            </h2>
             <mat-list-item *ngFor="let playlist of playlists">
                 <button
                 mat-stroked-button
@@ -14,8 +18,8 @@
         </mat-list>
     </div>
 
-    <div *ngIf="chosenSongs.length">
-        <mat-list>
+    <div *ngIf="chosenPlaylist.title">
+        <mat-list class="song-list">
             <h2 class="listTitle">Songs</h2>
             <mat-list-item *ngFor="let song of chosenSongs">
                 <button
@@ -28,7 +32,7 @@
         </mat-list>
     </div>
 
-    <div *ngIf="chosenSongs.length">
+    <div *ngIf="chosenPlaylist.title">
         <mat-card class="playlist-card">
             <mat-card-header>
                 <mat-card-title>
@@ -40,13 +44,18 @@
                         <span class="material-icons">delete</span>
                     </button>
                 </mat-card-title>
-                <mat-card-subtitle>{{ chosenPlaylist.amount }} songs - {{ chosenPlaylist.minutes }} min</mat-card-subtitle>
-                <mat-card-subtitle>By {{ chosenPlaylist.owner_name }} on {{ chosenPlaylist.date }}</mat-card-subtitle>
-                <mat-card-subtitle><p>{{ chosenPlaylist.description }}</p></mat-card-subtitle>
+                <mat-card-subtitle>
+                    {{ chosenPlaylist.amount }} songs - 
+                    {{ chosenPlaylist.minutes }} min
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    {{ chosenPlaylist.owner_name }} - {{ chosenPlaylist.date }}
+                </mat-card-subtitle>
+                <mat-card-subtitle><p>
+                    {{ chosenPlaylist.description }}
+                </p></mat-card-subtitle>
             </mat-card-header>
             <mat-button-toggle-group
-            name="isPublic" 
-            aria-label="Toggle public"
             (change)="toggleIsPublic($event.value)">
                 <mat-button-toggle
                 [checked]="!chosenPlaylist.is_public" 

@@ -13,3 +13,11 @@ export interface Playlist {
     amount: number,
     date: Date
 };
+
+export interface PlaylistWrite {
+    owner: string,
+    title: string,
+    description: string,
+    songs: any[],
+    is_public: boolean,
+}

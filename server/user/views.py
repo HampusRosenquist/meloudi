@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from user import serializers, models
 
-def index(resquest):
+def index(request):
     return HttpResponse("User view.")
 
 class UserViewSet(viewsets.ModelViewSet):

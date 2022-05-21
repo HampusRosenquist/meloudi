@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from music.serializers import SongSerializer
+from music.models import Song
 from user import models
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,6 +11,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
     songs_data = SongSerializer(source='songs', many=True, read_only=True)
     owner_name = serializers.CharField(source='owner.username', read_only=True)
+    songs = serializers.HyperlinkedRelatedField(
+        queryset=Song.objects.all(),
+        view_name='song-detail',
+        many=True,
+        allow_empty=True
+    )
     class Meta:
         model = models.Playlist
         fields = ['id', 'owner', 'owner_name', 'title', 'description', 'songs',

@@ -4,15 +4,20 @@
 }
 
 .song {
-    width: 25em;
+    width: 20em;
+    text-align: left;
 }
 
 .listTitle {
     text-align: center;
 }
 
+.song-list {
+    width: 20em;
+}
+
 .playlist-card {
-    max-width: 300px;
+    width: 15em;
 }
 
 .flex-container {

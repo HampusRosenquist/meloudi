@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -14,11 +14,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlbumComponent } from './album/album.component';
-import { DialogEdit, DialogEnsure, PlaylistsComponent } from './playlists/playlists.component'
+import {
+  DialogCreate,
+  DialogEdit,
+  DialogEnsure,
+  PlaylistsComponent
+} from './playlists/playlists.component'
 
 import { RestService } from './services/rest.service';
 
@@ -28,7 +34,8 @@ import { RestService } from './services/rest.service';
     AlbumComponent,
     PlaylistsComponent,
     DialogEdit,
-    DialogEnsure
+    DialogEnsure,
+    DialogCreate
   ],
   imports: [
     BrowserModule,
@@ -36,6 +43,7 @@ import { RestService } from './services/rest.service';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -44,7 +52,8 @@ import { RestService } from './services/rest.service';
     MatCardModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

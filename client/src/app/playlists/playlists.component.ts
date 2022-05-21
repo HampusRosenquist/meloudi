@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RestService } from '../services/rest.service';
 import { Song } from '../types/music';
@@ -20,7 +21,7 @@ export class PlaylistsComponent implements OnInit {
   constructor(public restService: RestService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.loadPlaylist();
+    this.loadPlaylists();
   }
 
   choosePlaylist(playlist: Playlist): void {
@@ -37,7 +38,7 @@ export class PlaylistsComponent implements OnInit {
     this.chosenSong.emit(song);
   }
 
-  loadPlaylist() {
+  loadPlaylists() {
     return this.restService.getPlaylists().subscribe((data: Rest) => {
       this.playlists = data.results;
     })
@@ -58,7 +59,7 @@ export class PlaylistsComponent implements OnInit {
       data: {
         title: this.chosenPlaylist.title,
         description: this.chosenPlaylist.description
-      },
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -74,38 +75,81 @@ export class PlaylistsComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogEnsure);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      this.restService.deletePlaylist(this.chosenPlaylist.id).subscribe();
-      
-      const index = this.playlists.indexOf(this.chosenPlaylist);
-      if (index > -1) {
-        this.playlists.splice(index, 1);
+      if (result) {
+        this.restService.deletePlaylist(this.chosenPlaylist.id).subscribe();
+        
+        const index = this.playlists.indexOf(this.chosenPlaylist);
+        if (index > -1) {
+          this.playlists.splice(index, 1);
+        }
+        this.deselectChosenPlalist();
       }
-      this.deselectChosenPlalist();
+    });
+  }
+
+  openNewPlaylistDialog(): void {
+    const dialogRef = this.dialog.open(DialogCreate, { width: '250px' });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const playlist = {
+          owner: "http://127.0.0.1:8000/users/1/",
+          title: result.title,
+          description: result.description,
+          songs: [],
+          is_public: result.isPublic
+        };
+        this.restService.createPlaylist(playlist).subscribe((playlist: Playlist) => {
+          this.playlists.push(playlist);
+        });
+      }
     });
   }
 
 }
 
-export interface DialogData {
+export interface DialogEditData {
   title: string;
   description: string;
-
 }
 
 @Component({
   selector: 'dialog-edit',
   templateUrl: 'dialog-edit.html',
 })
+
 export class DialogEdit {
   constructor(
     public dialogRef: MatDialogRef<DialogEdit>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogEditData,
   ) {}
 }
+
 
 @Component({
   selector: 'dialog-ensure',
   templateUrl: 'dialog-ensure.html',
 })
 export class DialogEnsure {}
+
+
+@Component({
+  selector: 'dialog-create',
+  templateUrl: 'dialog-create.html',
+})
+
+export class DialogCreate {
+  constructor(
+    public dialogRef: MatDialogRef<DialogCreate>
+  ) {}
+
+  createForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    isPublic: new FormControl('', [Validators.required])
+  });
+
+  onSubmit(): void {
+    this.dialogRef.close(this.createForm.value);
+  }
+}
