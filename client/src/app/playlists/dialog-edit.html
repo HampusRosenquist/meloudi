@@ -1,15 +1,17 @@
-<h1 mat-dialog-title>Edit playlist</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="data.title">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <input matInput [(ngModel)]="data.description">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Abort</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
-</div>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>Edit playlist</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" [ngModel]="data.title" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" formControlName="description" [ngModel]="data.description" required>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abort</button>
+    <button mat-button type="submit" [disabled]="editForm.invalid" cdkFocusInitial>Save</button>
+  </div>
+</form>

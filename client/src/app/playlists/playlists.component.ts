@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { RestService } from '../services/rest.service';
 import { Song } from '../types/music';
 import { Rest } from '../types/rest';
-import { Playlist } from '../types/user';
+import { Playlist, PlaylistWrite } from '../types/user';
 
 @Component({
   selector: 'app-playlists',
@@ -53,6 +53,12 @@ export class PlaylistsComponent implements OnInit {
     this.restService.updatePlaylist(this.chosenPlaylist).subscribe();
   }
 
+  private createPlayist(playlist: PlaylistWrite): void {
+    this.restService.createPlaylist(playlist).subscribe((playlist: Playlist) => {
+      this.playlists.push(playlist);
+    });
+  }
+
   openEditDialog(): void {
     const dialogRef = this.dialog.open(DialogEdit, {
       width: '250px',
@@ -92,16 +98,14 @@ export class PlaylistsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const playlist = {
+        const playlist = <PlaylistWrite>{
           owner: "http://127.0.0.1:8000/users/1/",
           title: result.title,
           description: result.description,
           songs: [],
           is_public: result.isPublic
         };
-        this.restService.createPlaylist(playlist).subscribe((playlist: Playlist) => {
-          this.playlists.push(playlist);
-        });
+        this.createPlayist(playlist);
       }
     });
   }
@@ -123,6 +127,15 @@ export class DialogEdit {
     public dialogRef: MatDialogRef<DialogEdit>,
     @Inject(MAT_DIALOG_DATA) public data: DialogEditData,
   ) {}
+
+  editForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required])
+  });
+
+  onSubmit(): void {
+    this.dialogRef.close(this.editForm.value);
+  }
 }
 
 
