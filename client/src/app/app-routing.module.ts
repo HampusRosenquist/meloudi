@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlbumComponent } from './album/album.component';
+import { LibraryComponent } from './library/library.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 
 const routes: Routes = [
-  { path: 'albums', component: AlbumComponent },
+  { path: 'library', component: LibraryComponent },
   { path: 'playlists', component: PlaylistsComponent}
 ];
 

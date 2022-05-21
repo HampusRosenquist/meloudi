@@ -13,16 +13,16 @@ export class AppComponent {
   song = <Song>{};
   songsPath = "./assets/"
   audioFile = new Audio(this.songsPath + "song.opus");
-  showAlbums = true;
+  showLibrary = true;
   showPlaylists = false;
   volume = 1;
 
   viewAlbums() {
-    this.showAlbums = true;
+    this.showLibrary = true;
     this.showPlaylists = false;
   }
   viewPlaylists() {
-    this.showAlbums = false;
+    this.showLibrary = false;
     this.showPlaylists = true;
   }
 

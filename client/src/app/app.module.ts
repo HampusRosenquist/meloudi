@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -18,12 +17,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlbumComponent } from './album/album.component';
+import { LibraryComponent } from './library/library.component';
 import {
+  PlaylistsComponent,
   DialogCreate,
   DialogEdit,
-  DialogEnsure,
-  PlaylistsComponent
+  DialogEnsure
 } from './playlists/playlists.component'
 
 import { RestService } from './services/rest.service';
@@ -31,7 +30,7 @@ import { RestService } from './services/rest.service';
 @NgModule({
   declarations: [
     AppComponent,
-    AlbumComponent,
+    LibraryComponent,
     PlaylistsComponent,
     DialogEdit,
     DialogEnsure,

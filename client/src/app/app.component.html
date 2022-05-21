@@ -46,18 +46,18 @@
 
   <span class="flexExpand"></span>
 
-  <button mat-button (click)="viewAlbums()">Album</button>
-  <button mat-button (click)="viewPlaylists()">Spellistor</button>
-  <button mat-button>Vänner</button>
-  <button mat-button>Profil</button>
+  <button mat-button (click)="viewAlbums()">Library</button>
+  <button mat-button (click)="viewPlaylists()">Playlists</button>
+  <button mat-button>Friends</button>
+  <button mat-button>Profile</button>
 </mat-toolbar>
 
 <div class="content" role="main"></div>
 
-<app-album
-  *ngIf="showAlbums"
+<app-library
+  *ngIf="showLibrary"
   (chosenSong)="chooseSong($event)">
-</app-album>
+</app-library>
 
 <app-playlists
   *ngIf="showPlaylists"

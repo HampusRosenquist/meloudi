@@ -5,11 +5,11 @@ import { RestService } from '../services/rest.service';
 import { Rest } from '../types/rest';
 
 @Component({
-    selector: 'app-album',
-    templateUrl: './album.component.html',
-    styleUrls: ['./album.component.css']
+    selector: 'app-library',
+    templateUrl: './library.component.html',
+    styleUrls: ['./library.component.css']
 })
-export class AlbumComponent implements OnInit{
+export class LibraryComponent implements OnInit {
     artists: Artist[] = [];
     albums: Album[] = [];
     songs: Song[] = [];
