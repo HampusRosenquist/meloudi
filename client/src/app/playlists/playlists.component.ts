@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { DialogAdd } from '../dialogs/dialog-add';
 import { DialogCreate } from '../dialogs/dialog-create';
 import { DialogEdit } from '../dialogs/dialog-edit';
 import { DialogEnsure } from '../dialogs/dialog-ensure';
@@ -18,10 +19,15 @@ export class PlaylistsComponent implements OnInit {
   playlists: Playlist[] = [];
   chosenPlaylist = <Playlist>{};
   chosenSongs: Song[] = [];
+  subscription!: Subscription;
 
+  @Input() songs: Song[] = [];
   @Output() chosenSong = new EventEmitter<Song>();
 
-  constructor(public restService: RestService, public dialog: MatDialog) { }
+  constructor(
+    private restService: RestService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.loadPlaylists();
@@ -111,6 +117,21 @@ export class PlaylistsComponent implements OnInit {
         this.createPlayist(playlist);
       }
     });
+  }
+
+  openAddSongDialog(): void {
+    const dialogRef = this.dialog.open(DialogAdd, {
+      width: '400px',
+      data: this.songs
+    });
+
+    dialogRef.afterClosed().subscribe(song => {
+      if (song) {
+        this.chosenPlaylist.songs.push('http://127.0.0.1:8000/songs/' + song.id + '/');
+        this.chosenPlaylist.songs_data.push(song);
+        this.updateChosenPlaylist();
+      }
+    })
   }
 
 }

@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Add song</h1>
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill" [style.width.px]=350>
+        <mat-label>Song</mat-label>
+        <input matInput
+            class="input"
+            type="text"
+            [formControl]="songForm"
+            [matAutocomplete]="auto"
+            required>
+        <mat-error>Please select a Song from the list.</mat-error>
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete"
+                        autoActiveFirstOption
+                        [displayWith]="displaySong">
+        <mat-option *ngFor="let song of filteredOptions | async" [value]="song">
+          {{ song.title }} - {{ song.artist_name }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>
+        Abort
+      </button>
+      <button mat-button type="submit" [disabled]="songForm.invalid">
+        Add
+      </button>
+    </div>
+</form>

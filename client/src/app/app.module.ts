@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { RestService } from './services/rest.service';
 import { DialogEdit } from './dialogs/dialog-edit';
 import { DialogEnsure } from './dialogs/dialog-ensure';
 import { DialogCreate } from './dialogs/dialog-create';
+import { DialogAdd } from './dialogs/dialog-add';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { DialogCreate } from './dialogs/dialog-create';
     PlaylistsComponent,
     DialogEdit,
     DialogEnsure,
-    DialogCreate
+    DialogCreate,
+    DialogAdd
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { DialogCreate } from './dialogs/dialog-create';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatAutocompleteModule
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

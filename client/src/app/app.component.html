@@ -56,12 +56,14 @@
 
 <app-library
   *ngIf="showLibrary"
-  (chosenSong)="chooseSong($event)">
+  (chosenSong)="chooseSong($event)"
+  (songsOutput)="receiveSongs($event)">
 </app-library>
 
 <app-playlists
   *ngIf="showPlaylists"
-  (chosenSong)="chooseSong($event)">
+  (chosenSong)="chooseSong($event)"
+  [songs]="songs">
 </app-playlists>
 
 <!--<router-outlet></router-outlet>-->

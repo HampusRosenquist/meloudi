@@ -1,7 +1,7 @@
 <div class="flex-container">
     <div>
         <mat-list>
-            <h2 class="listTitle">
+            <h2 class="list-title">
                 Playlists
                 <button mat-icon-button (click)="openNewPlaylistDialog()">
                     <span class="material-icons">add</span>
@@ -20,7 +20,12 @@
 
     <div *ngIf="chosenPlaylist.title">
         <mat-list class="song-list">
-            <h2 class="listTitle">Songs</h2>
+            <h2 class="list-title">
+                Songs
+                <button mat-icon-button (click)="openAddSongDialog()">
+                    <span class="material-icons">add</span>
+                </button>
+            </h2>
             <mat-list-item *ngFor="let song of chosenSongs">
                 <button
                 mat-stroked-button

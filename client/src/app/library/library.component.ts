@@ -17,14 +17,17 @@ export class LibraryComponent implements OnInit {
     chosenSongs: Song[] = [];
 
     @Output() chosenSong = new EventEmitter<Song>();
+    @Output() songsOutput = new EventEmitter<Song[]>();
+
+    constructor(
+        private restService: RestService,
+    ) { }
 
     ngOnInit(): void {
         this.loadArtists();
         this.loadAlbums();
         this.loadSongs();
     }
-
-    constructor(public restService: RestService) { }
 
     chooseArtist(artist: string) {
         this.chosenAlbums = this.albums.filter(album => album.artist_name === artist);
@@ -56,6 +59,7 @@ export class LibraryComponent implements OnInit {
         return this.restService.getSongs().subscribe((data: Rest) => {
             this.songs = data.results;
             this.chosenSongs = data.results;
+            this.songsOutput.emit(this.songs);
         })
     }
 }

@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'Meloudi';
   isPlaying = false;
   song = <Song>{};
+  songs: Song[] = [];
   songsPath = "./assets/"
   audioFile = new Audio(this.songsPath + "song.opus");
   showLibrary = true;
@@ -45,6 +46,10 @@ export class AppComponent {
     this.song = song;
     this.audioFile = new Audio(this.songsPath + song.file);
     this.setIsPlaying(true);
+  }
+
+  receiveSongs(songs: Song[]) {
+    this.songs = songs;
   }
 
   toggleIsPlaying() {
