@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSliderChange } from '@angular/material/slider';
+import { QueueComponent } from './queue/queue.component';
 import { Song } from './types/music';
 
 @Component({

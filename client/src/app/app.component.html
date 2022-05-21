@@ -1,53 +1,6 @@
 <mat-toolbar color="primary">
   <span>Meloudi</span>
 
-  <!--<button mat-button routerLink="/library">Library</button>
-  <button mat-button routerLink="/playlists">Playlists</button>-->
-  <button mat-button (click)="viewLibrary()">Library</button>
-  <button mat-button (click)="viewPlaylists()">Playlists</button>
-  <button mat-button>Friends</button>
-  <button mat-button>Profile</button>
-
-  <span class="flex-expand"></span>
-
-  <button mat-button>Queue</button>
-</mat-toolbar>
-
-<div class="content" role="main"></div>
-
-<app-library
-  *ngIf="showLibrary"
-  (chosenSong)="chooseSong($event)"
-  (songsOutput)="receiveSongs($event)">
-</app-library>
-
-<app-playlists
-  *ngIf="showPlaylists"
-  (chosenSong)="chooseSong($event)"
-  [songs]="songs">
-</app-playlists>
-
-
-<!--<router-outlet></router-outlet>-->
-
-<mat-toolbar class="bottom-toolbar" color="primary">
-  <span> {{ song.title }} - {{ song.artist_name }} </span>
-
-  <span class="flex-expand"></span>
-
-  <button mat-icon-button>
-    <span class="material-icons">music_note</span>
-  </button>
-  <mat-slider
-  min="0"
-  [max]="audioFile.duration"
-  [value]="audioFile.currentTime"
-  aria-label="Track position"
-  (input)="adjustPlaybackPosition($event)">
-  </mat-slider>
-
-  <span class="flex-expand"></span>
-
   <button mat-icon-button>
     <span class="material-icons">skip_previous</span>
   </button>
@@ -63,6 +16,17 @@
   </button>
 
   <span class="flex-expand"></span>
+  
+  <span> {{ song.title }} {{ song.title ? ' - ' : ''}} {{ song.artist_name }}</span>
+  <span class="material-icons">music_note</span>
+  <mat-slider
+  min="0"
+  [max]="audioFile.duration"
+  [value]="audioFile.currentTime"
+  aria-label="Track position"
+  (input)="adjustPlaybackPosition($event)">
+  </mat-slider>
+
   <span class="flex-expand"></span>
 
   <button mat-icon-button>
@@ -84,5 +48,33 @@
   aria-label="Audio level"
   (input)="adjustVolume($event)">
   </mat-slider>
-
 </mat-toolbar>
+
+<div class="content" role="main"></div>
+
+<mat-tab-group>
+  <mat-tab label="Library">
+    <app-library
+      (chosenSong)="chooseSong($event)"
+      (songsOutput)="receiveSongs($event)">
+    </app-library>
+  </mat-tab>
+  <mat-tab label="Playlists">
+    <app-playlists
+      (chosenSong)="chooseSong($event)"
+      [songs]="songs">
+    </app-playlists>
+  </mat-tab>
+  <mat-tab label="Friends">
+    <p>Friends!</p>
+  </mat-tab>
+  <mat-tab label="Profile">
+    <p>Profile!</p>
+  </mat-tab>
+  <mat-tab label="Queue">
+    <p>Queue!</p>
+  </mat-tab>
+</mat-tab-group>
+
+
+<!--<router-outlet></router-outlet>-->
