@@ -40,8 +40,6 @@ export class QueueComponent implements OnInit {
     }
     this.playing = song;
     this.nextSong.emit(song);
-    console.log(this.played);
-    console.log(this.queue);
   }
 
   playNext(): void {
@@ -52,8 +50,6 @@ export class QueueComponent implements OnInit {
       this.playing = <Song> this.queue.shift();
       this.nextSong.emit(this.playing);
     }
-    console.log(this.played);
-    console.log(this.queue);
   }
 
   playPrevious(): void {
@@ -64,8 +60,6 @@ export class QueueComponent implements OnInit {
       this.playing = <Song> this.played.pop();
       this.nextSong.emit(this.playing);
     }
-    console.log(this.played);
-    console.log(this.queue);
   }
 
   drop(event: CdkDragDrop<Song[]>): void {
@@ -77,7 +71,6 @@ export class QueueComponent implements OnInit {
   }
 
   dequeu(song: Song) {
-    console.log('right click');
     let index = this.queue.indexOf(song);
     if (index != -1) {
       this.queue.splice(index, 1);
