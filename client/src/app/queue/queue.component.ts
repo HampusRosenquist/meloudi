@@ -76,4 +76,13 @@ export class QueueComponent implements OnInit {
     this.queue.length = 0;
   }
 
+  dequeu(song: Song) {
+    console.log('right click');
+    let index = this.queue.indexOf(song);
+    if (index != -1) {
+      this.queue.splice(index, 1);
+    }
+    return false;
+  }
+
 }

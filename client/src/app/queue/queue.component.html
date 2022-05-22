@@ -9,6 +9,10 @@
 <div cdkDropList class="queue-list" (cdkDropListDropped)="drop($event)">
     <div class="queue-item" *ngFor="let song of queue" cdkDrag>
         <p class="left">{{ song.title }}</p>
-        <p class="right">{{ song.artist_name }}</p>
+        <p class="right">{{ song.artist_name }}
+            <button mat-icon-button color="warn" id="remove-button" (click)="dequeu(song)">
+                <span class="material-icons">remove</span>
+            </button>
+        </p>
     </div>
 </div>
