@@ -1,4 +1,11 @@
-<h2 class="list-title">Upcoming</h2>
+<div class="title-container">
+    <h2 class="list-title">
+        Upcoming
+        <button mat-icon-button id="clear-button" color="warn">
+            <span class="material-icons">delete</span>
+        </button>
+    </h2>
+</div>
 <div cdkDropList class="queue-list" (cdkDropListDropped)="drop($event)">
     <div class="queue-item" *ngFor="let song of queue" cdkDrag>
         <p class="left">{{ song.title }}</p>
