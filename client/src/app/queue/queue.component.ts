@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ShareService } from '../services/share.service';
 import { Song } from '../types/music';
@@ -14,6 +14,9 @@ export class QueueComponent implements OnInit {
   private enqueueSubscription!: Subscription;
   private dequeueSubscription!: Subscription;
 
+  @Input() audioFile!: any;
+  @Output() nextSong = new EventEmitter<Song>();
+
   constructor(private shareService: ShareService) { }
 
   ngOnInit(): void {
@@ -23,11 +26,20 @@ export class QueueComponent implements OnInit {
     this.dequeueSubscription = this.shareService.getDequeueNotification().subscribe(() =>
       this.queue.pop()
     );
+    this.audioFile.addEventListener('ended', () => {
+      if (this.queue.length) {
+        this.nextSong.emit(this.queue.shift());
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.enqueueSubscription.unsubscribe();
     this.dequeueSubscription.unsubscribe();
+  }
+
+  playNext(): void {
+
   }
 
   drop(event: CdkDragDrop<Song[]>): void {

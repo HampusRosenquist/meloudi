@@ -56,13 +56,13 @@
 <mat-tab-group>
   <mat-tab label="Library">
     <app-library
-      (chosenSong)="chooseSong($event)"
+      (chosenSong)="playSong($event)"
       (songsOutput)="receiveSongs($event)">
     </app-library>
   </mat-tab>
   <mat-tab label="Playlists">
     <app-playlists
-      (chosenSong)="chooseSong($event)"
+      (chosenSong)="playSong($event)"
       [songs]="songs">
     </app-playlists>
   </mat-tab>
@@ -73,9 +73,10 @@
     <p>Profile!</p>
   </mat-tab>
   <mat-tab label="Queue">
-    <app-queue></app-queue>
+    <app-queue
+      (nextSong)="playSong($event)"
+      [audioFile]="audioFile"></app-queue>
   </mat-tab>
 </mat-tab-group>
-
 
 <!--<router-outlet></router-outlet>-->

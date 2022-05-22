@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
-import { QueueComponent } from './queue/queue.component';
 import { Song } from './types/music';
 
 @Component({
@@ -9,24 +7,21 @@ import { Song } from './types/music';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Meloudi';
   isPlaying = false;
   song = <Song>{};
   songs: Song[] = [];
-  songsPath = "./assets/"
-  audioFile = new Audio(this.songsPath + "song.opus");
-  showLibrary = true;
-  showPlaylists = false;
+  songsPath = "./assets/";
+  audioFile = document.createElement('audio'); //new Audio(this.songsPath + "song.opus");
   volume = 1;
 
-  viewLibrary() {
-    this.showLibrary = true;
-    this.showPlaylists = false;
-  }
-  viewPlaylists() {
-    this.showLibrary = false;
-    this.showPlaylists = true;
+  ngOnInit(): void {
+    this.audioFile.setAttribute('src', this.songsPath + "song.opus");
+    this.audioFile.addEventListener('ended', () => {
+      this.isPlaying = false;
+      this.audioFile.currentTime = 0;
+    });
   }
 
   applyPlayingState() {
@@ -43,10 +38,10 @@ export class AppComponent {
     this.applyPlayingState();
   }
 
-  chooseSong(song: Song) {
+  playSong(song: Song) {
     this.setIsPlaying(false);
     this.song = song;
-    this.audioFile = new Audio(this.songsPath + song.file);
+    this.audioFile.setAttribute('src', this.songsPath + song.file); //new Audio(this.songsPath + song.file);
     this.setIsPlaying(true);
   }
 

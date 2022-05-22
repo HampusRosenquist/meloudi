@@ -1,4 +1,4 @@
-<h2 class="list-title">Up next</h2>
+<h2 class="list-title">Upcoming</h2>
 <div cdkDropList class="queue-list" (cdkDropListDropped)="drop($event)">
     <div class="queue-item" *ngFor="let song of queue" cdkDrag>
         <p class="left">{{ song.title }}</p>
