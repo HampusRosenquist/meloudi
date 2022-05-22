@@ -1,6 +1,6 @@
 <div class="flex-container">
     <div>
-        <mat-list>
+        <mat-list class="platlist-list">
             <h2 class="list-title">
                 Playlists
                 <button mat-icon-button (click)="openNewPlaylistDialog()">
@@ -31,7 +31,8 @@
                 mat-stroked-button
                 class="song"
                 (click)="playSong(song)">
-                <p>{{ song.title }} - {{ song.artist_name }}</p>
+                <p class="left">{{ song.title }}</p>
+                <p class="right">{{ song.artist_name }}</p>
                 </button>
             </mat-list-item>
         </mat-list>

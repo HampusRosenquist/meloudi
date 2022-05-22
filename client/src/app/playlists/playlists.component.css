@@ -1,25 +1,37 @@
+.flex-container {
+    display: flex;
+}
+
 .playlist {
     width: 15em;
     text-align: left;
 }
 
+.playlist-list {
+    width: 15em;
+}
+
 .song {
-    width: 20em;
+    width: 25em;
     text-align: left;
+}
+
+.song-list {
+    width: 25em;
 }
 
 .list-title {
     text-align: center;
 }
 
-.song-list {
-    width: 20em;
-}
-
 .playlist-card {
     width: 15em;
 }
 
-.flex-container {
-    display: flex;
-  }
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}

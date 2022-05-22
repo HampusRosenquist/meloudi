@@ -36,17 +36,18 @@
     <span class="material-icons">replay</span>
   </button>
   <span class="material-icons" *ngIf="audioFile.volume > 0.5">volume_up</span>
-  <span
-  class="material-icons"
-  *ngIf="audioFile.volume <= 0.5 && audioFile.volume != 0.0">volume_down
+  <span 
+    class="material-icons"
+    *ngIf="audioFile.volume <= 0.5 && audioFile.volume != 0.0">
+    volume_down
   </span>
   <span class="material-icons" *ngIf="audioFile.volume == 0.0">volume_off</span>
   <mat-slider
-  min="0"
-  max="100"
-  value="100"
-  aria-label="Audio level"
-  (input)="adjustVolume($event)">
+    min="0"
+    max="100"
+    value="100"
+    aria-label="Audio level"
+    (input)="adjustVolume($event)">
   </mat-slider>
 </mat-toolbar>
 
@@ -72,7 +73,7 @@
     <p>Profile!</p>
   </mat-tab>
   <mat-tab label="Queue">
-    <p>Queue!</p>
+    <app-queue></app-queue>
   </mat-tab>
 </mat-tab-group>
 

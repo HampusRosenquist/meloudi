@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Song } from '../types/music'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareService {
-  private songs = new Subject<Song[]>();
-  sharedSongs = this.songs.asObservable();
+  private song = new Subject<Song>();
+  private dequeueNotification = new Subject<boolean>();
 
   constructor() { }
 
-  public getSongs(): Observable<Song[]> {
-    return this.sharedSongs;
+  public getEnqueued(): Observable<Song> {
+    return this.song.asObservable();
   }
 
-  public updateSongs(songs: Song[]): void {
-    this.songs.next(songs);
+  public enqueue(song: Song): void {
+    this.song.next(song);
+  }
+
+  public getDequeueNotification(): Observable<boolean> {
+    return this.dequeueNotification.asObservable();
+  }
+
+  public dequeue(): void {
+    this.dequeueNotification.next(true);
   }
 }

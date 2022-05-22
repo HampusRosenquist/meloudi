@@ -1,12 +1,12 @@
-
+<div class="main">
 <div class="flex-container">
     <div>
-        <mat-list>
-            <h2 class="listTitle">Artists</h2>
+        <mat-list class="artist-list">
+            <h2 class="list-title">Artists</h2>
             <mat-list-item *ngFor="let artist of artists">
                 <button
                 mat-stroked-button
-                class="album"
+                class="artist"
                 (click)="chooseArtist(artist.name)">
                 <p>{{ artist.name }}</p>
                 </button>
@@ -15,13 +15,14 @@
     </div>
 
     <div>
-        <mat-list>
-            <h2 class="listTitle">Albums</h2>
+        <mat-list class="album-list">
+            <h2 class="list-title">Albums</h2>
             <mat-list-item *ngFor="let album of chosenAlbums">
                 <button
                 mat-stroked-button
                 class="album"
-                (click)="chooseAlbum(album.title)">
+                (click)="chooseAlbum(album.title)"
+                (contextmenu)="enqueueAlbum(album)">
                 <p>{{ album.title }}</p>
                 </button>
             </mat-list-item>
@@ -29,18 +30,19 @@
     </div>
 
     <div>
-        <mat-list>
-            <h2 class="listTitle">Songs</h2>
+        <mat-list class="song-list">
+            <h2 class="list-title">Songs</h2>
             <mat-list-item *ngFor="let song of chosenSongs">
                 <button
                 mat-stroked-button
                 class="song"
-                (click)="playSong(song)">
-                <p style="float: left">{{ song.index }}. {{ song.title }}</p>
-                <span class="flexExpand"></span>
-                <p style="float: right">{{ song.seconds }}</p>
+                (click)="playSong(song)"
+                (contextmenu)="enqueueSong(song)">
+                <p class="left">{{ song.index }}. {{ song.title }}</p>
+                <p class="right">{{ song.seconds }}</p>
                 </button>
             </mat-list-item>
         </mat-list>
     </div>
+</div>
 </div>

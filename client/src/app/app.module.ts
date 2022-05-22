@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { DialogEnsure } from './dialogs/dialog-ensure';
 import { DialogCreate } from './dialogs/dialog-create';
 import { DialogAdd } from './dialogs/dialog-add';
 import { QueueComponent } from './queue/queue.component';
+import { ShareService } from './services/share.service';
 
 @NgModule({
   declarations: [
@@ -59,9 +61,10 @@ import { QueueComponent } from './queue/queue.component';
     MatFormFieldModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule
   ],
-  providers: [RestService],
+  providers: [RestService, ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

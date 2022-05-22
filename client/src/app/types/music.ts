@@ -21,7 +21,7 @@ export interface Song {
     artist: string,
     artist_name: string,
     album: string,
-    album_name: string,
+    album_title: string,
     seconds: number,
     index: number,
     file: string

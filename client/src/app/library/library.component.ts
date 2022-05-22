@@ -3,6 +3,8 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Artist, Album, Song } from '../types/music';
 import { RestService } from '../services/rest.service';
 import { Rest } from '../types/rest';
+import { ShareService } from '../services/share.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-library',
@@ -21,6 +23,8 @@ export class LibraryComponent implements OnInit {
 
     constructor(
         private restService: RestService,
+        private shareService: ShareService,
+        private snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
@@ -35,7 +39,7 @@ export class LibraryComponent implements OnInit {
     }
 
     chooseAlbum(album: string) {
-        this.chosenSongs = this.songs.filter(song => song.album_name === album);
+        this.chosenSongs = this.songs.filter(song => song.album_title === album);
     }
 
     playSong(song: Song) {
@@ -61,5 +65,40 @@ export class LibraryComponent implements OnInit {
             this.chosenSongs = data.results;
             this.songsOutput.emit(this.songs);
         })
+    }
+
+    enqueueSong(song: Song): boolean {
+        this.shareService.enqueue(song);
+        
+        let _snackBar = this.snackBar.open("Enqueued " + song.title, 'Undo', {
+            duration: 3000
+        });
+
+        _snackBar.afterDismissed().subscribe(info => {
+            if (info.dismissedByAction === true) { // User pressed 'Undo'.
+                this.shareService.dequeue();
+            }
+        });
+        return false;
+    }
+
+    enqueueAlbum(album: Album): boolean {
+        const songs = this.songs.filter(song => song.album_title === album.title);
+        songs.forEach(song => {
+            this.shareService.enqueue(song);
+        });
+
+        let _snackBar = this.snackBar.open("Enqueued " + album.title, 'Undo', {
+            duration: 3000
+        });
+
+        _snackBar.afterDismissed().subscribe(info => {
+            if (info.dismissedByAction === true) { // User pressed 'Undo'.
+                for (let i = 0; i < songs.length; i++) {
+                    this.shareService.dequeue();
+                }
+            }
+        });
+        return false;
     }
 }

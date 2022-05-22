@@ -15,7 +15,7 @@ class AlbumSerializer(serializers.HyperlinkedModelSerializer):
 
 class SongSerializer(serializers.HyperlinkedModelSerializer):
     artist_name = serializers.CharField(source='artist.name', read_only=True)
-    album_name = serializers.CharField(source='album.title', read_only=True)
+    album_title = serializers.CharField(source='album.title', read_only=True)
     class Meta:
         model = models.Song
-        fields = ['id', 'title', 'artist', 'artist_name', 'album', 'album_name', 'seconds', 'index', 'file']
+        fields = ['id', 'title', 'artist', 'artist_name', 'album', 'album_title', 'seconds', 'index', 'file']
