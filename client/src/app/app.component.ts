@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
+import { QueueComponent } from './queue/queue.component';
 import { Song } from './types/music';
 
 @Component({
@@ -7,7 +8,7 @@ import { Song } from './types/music';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Meloudi';
   isPlaying = false;
   song = <Song>{};
@@ -16,11 +17,17 @@ export class AppComponent implements OnInit {
   audioFile = document.createElement('audio'); //new Audio(this.songsPath + "song.opus");
   volume = 1;
 
+  @ViewChild(QueueComponent) private queueComponent!: QueueComponent;
+
   ngOnInit(): void {
     this.audioFile.setAttribute('src', this.songsPath + "song.opus");
+  }
+
+  ngAfterViewInit(): void {
     this.audioFile.addEventListener('ended', () => {
       this.isPlaying = false;
       this.audioFile.currentTime = 0;
+      this.next();
     });
   }
 
@@ -38,6 +45,10 @@ export class AppComponent implements OnInit {
     this.applyPlayingState();
   }
 
+  playNow(song: Song) {
+    this.queueComponent.playNow(song);
+  }
+
   playSong(song: Song) {
     this.setIsPlaying(false);
     this.song = song;
@@ -52,6 +63,14 @@ export class AppComponent implements OnInit {
   toggleIsPlaying() {
     this.isPlaying = !this.isPlaying;
     this.applyPlayingState();
+  }
+
+  previous() {
+    this.queueComponent.playPrevious();
+  }
+
+  next() {
+    this.queueComponent.playNext();
   }
 
   stop() {

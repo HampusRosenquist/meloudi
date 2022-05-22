@@ -1,14 +1,14 @@
 <mat-toolbar color="primary">
   <span>Meloudi</span>
 
-  <button mat-icon-button>
+  <button mat-icon-button (click)="previous()">
     <span class="material-icons">skip_previous</span>
   </button>
   <button mat-icon-button (click)="toggleIsPlaying()">
     <span class="material-icons" *ngIf="isPlaying">pause</span>
     <span class="material-icons" *ngIf="!isPlaying">play_arrow</span>
   </button>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="next()">
     <span class="material-icons">skip_next</span>
   </button>
   <button mat-icon-button (click)="stop()">
@@ -56,13 +56,13 @@
 <mat-tab-group>
   <mat-tab label="Library">
     <app-library
-      (chosenSong)="playSong($event)"
+      (chosenSong)="playNow($event)"
       (songsOutput)="receiveSongs($event)">
     </app-library>
   </mat-tab>
   <mat-tab label="Playlists">
     <app-playlists
-      (chosenSong)="playSong($event)"
+      (chosenSong)="playNow($event)"
       [songs]="songs">
     </app-playlists>
   </mat-tab>
@@ -74,8 +74,8 @@
   </mat-tab>
   <mat-tab label="Queue">
     <app-queue
-      (nextSong)="playSong($event)"
-      [audioFile]="audioFile"></app-queue>
+      (nextSong)="playSong($event)">
+    </app-queue>
   </mat-tab>
 </mat-tab-group>
 

@@ -11,10 +11,11 @@ import { Song } from '../types/music';
 })
 export class QueueComponent implements OnInit {
   queue: Song[] = [];
+  played: Song[] = [];
+  private playing!: Song;
   private enqueueSubscription!: Subscription;
   private dequeueSubscription!: Subscription;
 
-  @Input() audioFile!: any;
   @Output() nextSong = new EventEmitter<Song>();
 
   constructor(private shareService: ShareService) { }
@@ -26,11 +27,6 @@ export class QueueComponent implements OnInit {
     this.dequeueSubscription = this.shareService.getDequeueNotification().subscribe(() =>
       this.queue.pop()
     );
-    this.audioFile.addEventListener('ended', () => {
-      if (this.queue.length) {
-        this.nextSong.emit(this.queue.shift());
-      }
-    });
   }
 
   ngOnDestroy(): void {
@@ -38,8 +34,38 @@ export class QueueComponent implements OnInit {
     this.dequeueSubscription.unsubscribe();
   }
 
-  playNext(): void {
+  playNow(song: Song): void {
+    if (this.playing) {
+      this.played.push(this.playing);
+    }
+    this.playing = song;
+    this.nextSong.emit(song);
+    console.log(this.played);
+    console.log(this.queue);
+  }
 
+  playNext(): void {
+    if (this.playing) {
+      this.played.push(this.playing);
+    }
+    if (this.queue.length) {
+      this.playing = <Song> this.queue.shift();
+      this.nextSong.emit(this.playing);
+    }
+    console.log(this.played);
+    console.log(this.queue);
+  }
+
+  playPrevious(): void {
+    if (this.playing) {
+      this.queue.unshift(this.playing);
+    }
+    if (this.played.length) {
+      this.playing = <Song> this.played.pop();
+      this.nextSong.emit(this.playing);
+    }
+    console.log(this.played);
+    console.log(this.queue);
   }
 
   drop(event: CdkDragDrop<Song[]>): void {
