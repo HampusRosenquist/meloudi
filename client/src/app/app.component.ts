@@ -66,7 +66,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   previous() {
-    this.queueComponent.playPrevious();
+    if (this.audioFile.currentTime > 5) {
+      this.audioFile.currentTime = 0;
+      this.audioFile.play();
+    } else {
+      this.queueComponent.playPrevious();
+    }
   }
 
   next() {
