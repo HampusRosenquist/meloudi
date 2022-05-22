@@ -72,4 +72,8 @@ export class QueueComponent implements OnInit {
     moveItemInArray(this.queue, event.previousIndex, event.currentIndex);
   }
 
+  clearQueue(): void {
+    this.queue.length = 0;
+  }
+
 }
