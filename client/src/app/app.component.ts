@@ -11,6 +11,7 @@ import { Song } from './types/music';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'Meloudi';
   isPlaying = false;
+  isShuffling = false;
   song = <Song>{};
   songs: Song[] = [];
   songsPath = "./assets/";
@@ -81,6 +82,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   stop() {
     this.setIsPlaying(false);
     this.audioFile.currentTime = 0;
+  }
+
+  toggleShuffling(): void {
+    this.queueComponent.shuffleOn = !this.queueComponent.shuffleOn;
+    this.isShuffling = this.queueComponent.shuffleOn;
   }
 
   adjustVolume(event: MatSliderChange) {

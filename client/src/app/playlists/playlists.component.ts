@@ -44,7 +44,6 @@ export class PlaylistsComponent implements OnInit {
   }
 
   playSong(song: Song): void {
-    console.log(song);
     this.chosenSong.emit(song);
   }
 

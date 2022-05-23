@@ -29,8 +29,9 @@
 
   <span class="flex-expand"></span>
 
-  <button mat-icon-button>
-    <span class="material-icons">shuffle</span>
+  <button mat-icon-button (click)="toggleShuffling()">
+    <span class="material-icons" *ngIf="isShuffling">shuffle_on</span>
+    <span class="material-icons" *ngIf="!isShuffling">shuffle</span>
   </button>
   <button mat-icon-button>
     <span class="material-icons">replay</span>

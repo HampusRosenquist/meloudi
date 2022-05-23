@@ -13,6 +13,7 @@ export class QueueComponent implements OnInit {
   queue: Song[] = [];
   played: Song[] = [];
   private playing!: Song;
+  public shuffleOn: boolean = false;
   private enqueueSubscription!: Subscription;
   private dequeueSubscription!: Subscription;
 
@@ -47,7 +48,11 @@ export class QueueComponent implements OnInit {
       this.played.push(this.playing);
     }
     if (this.queue.length) {
-      this.playing = <Song> this.queue.shift();
+      if (this.shuffleOn) {
+        this.playing = this.popRandomFromQueue();
+      } else {
+        this.playing = <Song> this.queue.shift();
+      }
       this.nextSong.emit(this.playing);
     }
   }
@@ -71,11 +76,19 @@ export class QueueComponent implements OnInit {
   }
 
   dequeu(song: Song) {
-    let index = this.queue.indexOf(song);
+    let index:number = this.queue.indexOf(song);
     if (index != -1) {
       this.queue.splice(index, 1);
     }
     return false;
+  }
+
+  private popRandomFromQueue(): Song {
+    let randomIndex:number = Math.floor(Math.random() * (this.queue.length - 1))
+    console.log(randomIndex);
+    let song:Song = this.queue[randomIndex];
+    this.queue.splice(randomIndex, 1);
+    return song;
   }
 
 }
