@@ -3,7 +3,10 @@
         <mat-list class="platlist-list">
             <h2 class="list-title">
                 Playlists
-                <button mat-icon-button color="accent" (click)="openNewPlaylistDialog()">
+                <button
+                mat-icon-button color="accent"
+                (click)="openNewPlaylistDialog()"
+                (keyup)="false">
                     <span class="material-icons">add</span>
                 </button>
             </h2>
@@ -11,7 +14,8 @@
                 <button
                 mat-stroked-button
                 class="playlist"
-                (click)="choosePlaylist(playlist)">
+                (click)="choosePlaylist(playlist)"
+                (keyup)="false">
                 <p>{{ playlist.title }}</p>
                 </button>
             </mat-list-item>
@@ -22,7 +26,11 @@
         <mat-list class="song-list">
             <h2 class="list-title">
                 Songs
-                <button mat-icon-button color="accent" (click)="openAddSongDialog()">
+                <button 
+                mat-icon-button
+                color="accent"
+                (click)="openAddSongDialog()"
+                (keyup)="false">
                     <span class="material-icons">add</span>
                 </button>
             </h2>
@@ -30,7 +38,8 @@
                 <button
                 mat-stroked-button
                 class="song"
-                (click)="playSong(song)">
+                (click)="playSong(song)"
+                (keyup)="false">
                 <p class="left">{{ song.title }}</p>
                 <p class="right">{{ song.artist_name }}</p>
                 </button>
@@ -43,10 +52,18 @@
             <mat-card-header>
                 <mat-card-title>
                     {{ chosenPlaylist.title }}
-                    <button mat-icon-button color="accent" (click)="openEditDialog()">
+                    <button
+                    mat-icon-button
+                    color="accent"
+                    (click)="openEditDialog()"
+                    (keyup)="false">
                         <span class="material-icons">edit_note</span>
                     </button>
-                    <button mat-icon-button color="warn" (click)="openDeleteDialog()">
+                    <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="openDeleteDialog()"
+                    (keyup)="false">
                         <span class="material-icons">delete</span>
                     </button>
                 </mat-card-title>

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   isPlaying:boolean = false;
   isShuffling:boolean = false;
   isReplaying:boolean = false;
+  isWriting:boolean = false;
   song = <Song>{};
   songs: Song[] = [];
   songsPath = "./assets/";
@@ -31,6 +32,12 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.audioFile.currentTime = 0;
       this.next();
     });
+
+    document.addEventListener('keyup', (event) => {
+      if (!this.isWriting && event.code === "Space") {
+        this.toggleIsPlaying();
+      }
+    }, false);
   }
 
   applyPlayingState() {
@@ -106,5 +113,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (event.value != null) {
       this.audioFile.currentTime = event.value;
     }
+  }
+
+  setIsWirting(isWriting: boolean): void {
+    this.isWriting = isWriting;
   }
 }

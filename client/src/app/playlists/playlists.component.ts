@@ -23,6 +23,7 @@ export class PlaylistsComponent implements OnInit {
 
   @Input() songs: Song[] = [];
   @Output() chosenSong = new EventEmitter<Song>();
+  @Output() isWriting = new EventEmitter<boolean>();
 
   constructor(
     private restService: RestService,
@@ -69,6 +70,8 @@ export class PlaylistsComponent implements OnInit {
   }
 
   openEditDialog(): void {
+    this.isWriting.emit(true);
+
     const dialogRef = this.dialog.open(DialogEdit, {
       width: '250px',
       data: {
@@ -78,6 +81,8 @@ export class PlaylistsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.isWriting.emit(false);
+
       if (result) {
         this.chosenPlaylist.title = result.title;
         this.chosenPlaylist.description = result.description;
@@ -87,9 +92,13 @@ export class PlaylistsComponent implements OnInit {
   }
 
   openDeleteDialog(): void {
+    this.isWriting.emit(true);
+
     const dialogRef = this.dialog.open(DialogEnsure);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.isWriting.emit(false);
+
       if (result) {
         this.restService.deletePlaylist(this.chosenPlaylist.id).subscribe();
         
@@ -103,9 +112,13 @@ export class PlaylistsComponent implements OnInit {
   }
 
   openNewPlaylistDialog(): void {
+    this.isWriting.emit(true);
+
     const dialogRef = this.dialog.open(DialogCreate, { width: '250px' });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.isWriting.emit(false);
+
       if (result) {
         const playlist = <PlaylistWrite>{
           owner: "http://127.0.0.1:8000/users/1/",
@@ -120,12 +133,16 @@ export class PlaylistsComponent implements OnInit {
   }
 
   openAddSongDialog(): void {
+    this.isWriting.emit(true);
+
     const dialogRef = this.dialog.open(DialogAdd, {
       width: '400px',
       data: this.songs
     });
 
     dialogRef.afterClosed().subscribe(song => {
+      this.isWriting.emit(false);
+      
       if (song) {
         this.chosenPlaylist.songs.push('http://127.0.0.1:8000/songs/' + song.id + '/');
         this.chosenPlaylist.songs_data.push(song);
