@@ -9,9 +9,10 @@ import { Song } from './types/music';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  title = 'Meloudi';
-  isPlaying = false;
-  isShuffling = false;
+  title:string = 'Meloudi';
+  isPlaying:boolean = false;
+  isShuffling:boolean = false;
+  isReplaying:boolean = false;
   song = <Song>{};
   songs: Song[] = [];
   songsPath = "./assets/";
@@ -87,6 +88,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   toggleShuffling(): void {
     this.queueComponent.shuffleOn = !this.queueComponent.shuffleOn;
     this.isShuffling = this.queueComponent.shuffleOn;
+  }
+
+  toggleReplaying(): void {
+    this.queueComponent.replayOn = !this.queueComponent.replayOn;
+    this.isReplaying = this.queueComponent.replayOn;
   }
 
   adjustVolume(event: MatSliderChange) {
