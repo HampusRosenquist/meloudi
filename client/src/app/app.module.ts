@@ -18,6 +18,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { AuthModule } from '@auth0/auth0-angular';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LibraryComponent } from './library/library.component';
@@ -31,6 +33,8 @@ import { DialogCreate } from './dialogs/dialog-create';
 import { DialogAdd } from './dialogs/dialog-add';
 import { QueueComponent } from './queue/queue.component';
 import { ShareService } from './services/share.service';
+import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { ShareService } from './services/share.service';
     DialogEnsure,
     DialogCreate,
     DialogAdd,
-    QueueComponent
+    QueueComponent,
+    AuthButtonComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,11 @@ import { ShareService } from './services/share.service';
     MatSnackBarModule,
     MatAutocompleteModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    AuthModule.forRoot({
+      domain: 'dev-yehja2pp.eu.auth0.com',
+      clientId: 'JuB0hLExJbYhZmGQW5P8svR4HybgsvaO'
+    })
   ],
   providers: [RestService, ShareService],
   bootstrap: [AppComponent]
