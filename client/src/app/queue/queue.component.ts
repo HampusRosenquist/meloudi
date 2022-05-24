@@ -17,6 +17,7 @@ export class QueueComponent implements OnInit {
   public replayOn: boolean = false;
   private enqueueSubscription!: Subscription;
   private dequeueSubscription!: Subscription;
+  private clearQueueSubscription!: Subscription;
 
   @Output() nextSong = new EventEmitter<Song>();
 
@@ -29,11 +30,15 @@ export class QueueComponent implements OnInit {
     this.dequeueSubscription = this.shareService.getDequeueNotification().subscribe(() =>
       this.queue.pop()
     );
+    this.clearQueueSubscription = this.shareService.getClearQueueNotification().subscribe(() =>
+      this.clearQueue()
+    );
   }
 
   ngOnDestroy(): void {
     this.enqueueSubscription.unsubscribe();
     this.dequeueSubscription.unsubscribe();
+    this.clearQueueSubscription.unsubscribe();
   }
 
   playNow(song: Song): void {
@@ -78,12 +83,11 @@ export class QueueComponent implements OnInit {
     this.queue.length = 0;
   }
 
-  dequeu(song: Song) {
+  dequeu(song: Song): void {
     let index:number = this.queue.indexOf(song);
     if (index != -1) {
       this.queue.splice(index, 1);
     }
-    return false;
   }
 
   private popRandomFromQueue(): Song {

@@ -8,6 +8,7 @@ import { Song } from '../types/music'
 export class ShareService {
   private song = new Subject<Song>();
   private dequeueNotification = new Subject<boolean>();
+  private clearQueueNotification = new Subject<boolean>();
 
   constructor() { }
 
@@ -25,5 +26,13 @@ export class ShareService {
 
   public dequeue(): void {
     this.dequeueNotification.next(true);
+  }
+
+  public getClearQueueNotification(): Observable<boolean> {
+    return this.clearQueueNotification.asObservable();
+  }
+
+  public clearQueue(): void {
+    this.clearQueueNotification.next(true);
   }
 }

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   song = <Song>{};
   songs: Song[] = [];
   songsPath = "./assets/";
-  audioFile = document.createElement('audio'); //new Audio(this.songsPath + "song.opus");
+  audioFile = document.createElement('audio');
   volume = 1;
 
   @ViewChild(QueueComponent) private queueComponent!: QueueComponent;
@@ -34,8 +34,21 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
 
     document.addEventListener('keyup', (event) => {
-      if (!this.isWriting && event.code === "Space") {
-        this.toggleIsPlaying();
+      if (!this.isWriting) {
+        switch (event.code) {
+          case "Space":
+            this.toggleIsPlaying();
+            break;
+          case "KeyS":
+            this.stop();
+            break;
+          case "KeyN":
+            this.next();
+            break;
+          case "KeyP":
+            this.previous();
+            break;
+        }
       }
     }, false);
   }
@@ -61,7 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   playSong(song: Song) {
     this.setIsPlaying(false);
     this.song = song;
-    this.audioFile.setAttribute('src', this.songsPath + song.file); //new Audio(this.songsPath + song.file);
+    this.audioFile.setAttribute('src', this.songsPath + song.file);
     this.setIsPlaying(true);
   }
 

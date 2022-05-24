@@ -12,12 +12,12 @@
 }
 
 .song {
-    width: 25em;
-    text-align: left;
+    display: flex;
+    width: 30em;
 }
 
 .song-list {
-    width: 25em;
+    width: 30em;
 }
 
 .list-title {
@@ -34,4 +34,12 @@
 
 .right {
     float: right;
+}
+
+#song-button {
+    width: 25em;
+}
+
+#remove-button {
+    height: 3px;
 }

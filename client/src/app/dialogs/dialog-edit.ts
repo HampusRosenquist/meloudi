@@ -15,8 +15,8 @@ export class DialogEdit {
     ) {}
 
     editForm = new FormGroup({
-        title: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required])
+        title: new FormControl(this.data.title, [Validators.required]),
+        description: new FormControl(this.data.description, [Validators.required])
     });
 
     onSubmit(): void {

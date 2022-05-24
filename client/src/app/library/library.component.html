@@ -33,7 +33,16 @@
 
     <div>
         <mat-list class="song-list">
-            <h2 class="list-title">Songs</h2>
+            <h2 class="list-title">
+                <button 
+                mat-icon-button
+                color="accent"
+                (click)="playChosenAlbum()"
+                (keyup)="false">
+                    <span class="material-icons">play_arrow</span>
+                </button>
+                Songs
+            </h2>
             <mat-list-item *ngFor="let song of chosenSongs">
                 <button
                 mat-stroked-button

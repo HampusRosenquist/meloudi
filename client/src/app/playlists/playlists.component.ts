@@ -1,11 +1,14 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { DialogAdd } from '../dialogs/dialog-add';
 import { DialogCreate } from '../dialogs/dialog-create';
 import { DialogEdit } from '../dialogs/dialog-edit';
 import { DialogEnsure } from '../dialogs/dialog-ensure';
 import { RestService } from '../services/rest.service';
+import { ShareService } from '../services/share.service';
 import { Song } from '../types/music';
 import { Rest } from '../types/rest';
 import { Playlist, PlaylistWrite } from '../types/user';
@@ -27,7 +30,9 @@ export class PlaylistsComponent implements OnInit {
 
   constructor(
     private restService: RestService,
-    private dialog: MatDialog
+    private shareService: ShareService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -142,13 +147,75 @@ export class PlaylistsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(song => {
       this.isWriting.emit(false);
-      
+
       if (song) {
         this.chosenPlaylist.songs.push('http://127.0.0.1:8000/songs/' + song.id + '/');
         this.chosenPlaylist.songs_data.push(song);
         this.updateChosenPlaylist();
       }
     })
+  }
+
+  removeSong(song: Song): void {
+    let _snackBar = this.snackBar.open("Removed " + song.title, 'Undo', {
+      duration: 3000
+    });
+
+    let index:number = this.chosenSongs.indexOf(song);
+    if (index != -1) {
+      this.chosenSongs.splice(index, 1);
+    
+      _snackBar.afterDismissed().subscribe(info => {
+        if (info.dismissedByAction === true) { // User pressed 'Undo'.
+          this.chosenSongs.splice(index, 0, song);
+        } else {
+          this.chosenPlaylist.songs.splice(index, 1);
+          this.updateChosenPlaylist();
+        }
+      });
+    }
+  }
+
+  enqueueSong(song: Song): boolean {
+    this.shareService.enqueue(song);
+    
+    let _snackBar = this.snackBar.open("Enqueued " + song.title, 'Undo', {
+        duration: 3000
+    });
+
+    _snackBar.afterDismissed().subscribe(info => {
+        if (info.dismissedByAction === true) { // User pressed 'Undo'.
+            this.shareService.dequeue();
+        }
+    });
+    return false;
+  }
+
+  enqueuePlaylist(playlist: Playlist): boolean {
+    playlist.songs_data.forEach(song => {
+        this.shareService.enqueue(song);
+    });
+
+    let _snackBar = this.snackBar.open("Enqueued " + playlist.title, 'Undo', {
+        duration: 3000
+    });
+
+    _snackBar.afterDismissed().subscribe(info => {
+        if (info.dismissedByAction === true) { // User pressed 'Undo'.
+            for (let i = 0; i < playlist.songs_data.length; i++) {
+                this.shareService.dequeue();
+            }
+        }
+    });
+    return false;
+  }
+
+  playChosenPlaylist(): void {
+    this.playSong(this.chosenSongs[0]);
+    this.shareService.clearQueue();
+    this.chosenSongs.slice(1).forEach(song => {
+      this.shareService.enqueue(song);
+    });
   }
 
 }
