@@ -117,6 +117,7 @@ export class PlaylistsComponent implements OnInit {
   }
 
   openNewPlaylistDialog(): void {
+    this.loadPlaylists(); // TODO remove
     this.isWriting.emit(true);
 
     const dialogRef = this.dialog.open(DialogCreate, { width: '250px' });

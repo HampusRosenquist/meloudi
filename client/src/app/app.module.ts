@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,7 +18,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,10 +71,30 @@ import { ProfileComponent } from './profile/profile.component';
     DragDropModule,
     AuthModule.forRoot({
       domain: 'dev-yehja2pp.eu.auth0.com',
-      clientId: 'JuB0hLExJbYhZmGQW5P8svR4HybgsvaO'
+      clientId: 'JuB0hLExJbYhZmGQW5P8svR4HybgsvaO',
+      clientSecret: 'ks9ppvS5FS2y3Wiq3oe8aBtxY0mZQYE38gbPgwvdMXM3whrnu14Fzz6n6tGONWYi',
+      audience: 'https://meloudi/api',
+      /*httpInterceptor: {
+        allowedList: [
+          {
+            uri: 'http://127.0.0.1:8000/*',
+            tokenOptions: {
+              audience: 'https://meloudi/api'
+            }
+          }
+        ]
+      }*/
     })
   ],
-  providers: [RestService, ShareService],
+  providers: [
+    RestService,
+    ShareService,
+    /*{
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true 
+    }*/
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

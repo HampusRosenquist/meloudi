@@ -2,32 +2,23 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from music import serializers, models
+from server.utils import get_token_auth_header, requires_scope
 
 def index(request):
     return HttpResponse("User view.")
 
-def download(request):
-    f = request.GET.get('f', '')
-    filename = f.replace('..', '').replace('/', '')
-    filepath = '/home/hampus/' + filename
-    file = open(filepath, 'rb')
-
-    return HttpResponse(file, headers={
-        'Content-Type': 'audio/mpeg',
-        'Content-Disposition': 'attachment; filename=' + filename
-        })
 
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = models.Artist.objects.all().order_by('name')
     serializer_class = serializers.ArtistSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 class AlbumViewSet(viewsets.ModelViewSet):
     queryset = models.Album.objects.all().order_by('artist', '-year')
     serializer_class = serializers.AlbumSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 class SongViewSet(viewsets.ModelViewSet):
     queryset = models.Song.objects.all().order_by('album', 'index')
     serializer_class = serializers.SongSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]

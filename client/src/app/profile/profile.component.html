@@ -18,3 +18,7 @@
 <div *ngIf="!(auth.user$ | async)">
     <h3>You need to be logged in for this feature.</h3>
 </div>
+
+<div>
+    <pre>{{ metadata | json }}</pre>
+</div>
