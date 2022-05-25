@@ -74,7 +74,7 @@ import { ProfileComponent } from './profile/profile.component';
       clientId: 'JuB0hLExJbYhZmGQW5P8svR4HybgsvaO',
       clientSecret: 'ks9ppvS5FS2y3Wiq3oe8aBtxY0mZQYE38gbPgwvdMXM3whrnu14Fzz6n6tGONWYi',
       audience: 'https://meloudi/api',
-      /*httpInterceptor: {
+      httpInterceptor: {
         allowedList: [
           {
             uri: 'http://127.0.0.1:8000/*',
@@ -83,17 +83,17 @@ import { ProfileComponent } from './profile/profile.component';
             }
           }
         ]
-      }*/
+      }
     })
   ],
   providers: [
     RestService,
     ShareService,
-    /*{
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true 
-    }*/
+    }
   ],
   bootstrap: [AppComponent]
 })
