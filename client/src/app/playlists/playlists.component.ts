@@ -10,7 +10,6 @@ import { DialogEnsure } from '../dialogs/dialog-ensure';
 import { RestService } from '../services/rest.service';
 import { ShareService } from '../services/share.service';
 import { Song } from '../types/music';
-import { Rest } from '../types/rest';
 import { Playlist, PlaylistWrite } from '../types/user';
 
 @Component({
@@ -57,8 +56,8 @@ export class PlaylistsComponent implements OnInit {
   }
 
   loadPlaylists() {
-    return this.restService.getPlaylists().subscribe((data: Rest) => {
-      this.playlists = data.results;
+    return this.restService.getPlaylists().subscribe((playlists: Playlist[]) => {
+      this.playlists = playlists;
     })
   }
 
@@ -129,7 +128,6 @@ export class PlaylistsComponent implements OnInit {
 
       if (result) {
         const playlist = <PlaylistWrite>{
-          owner: "http://127.0.0.1:8000/users/1/",
           title: result.title,
           description: result.description,
           songs: [],

@@ -42,9 +42,9 @@ export class RestService {
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
-  getPlaylists(): Observable<Rest> {
+  getPlaylists(): Observable<Playlist[]> {
     return this.http
-      .get<Rest>(this.playlistsUrl)
+      .get<Playlist[]>(this.playlistsUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 

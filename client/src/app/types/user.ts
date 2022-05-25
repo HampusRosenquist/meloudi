@@ -15,7 +15,6 @@ export interface Playlist {
 };
 
 export interface PlaylistWrite {
-    owner: string,
     title: string,
     description: string,
     songs: any[],

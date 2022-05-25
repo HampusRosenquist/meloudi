@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from music import serializers, models
-from server.utils import get_token_auth_header, requires_scope
 
 def index(request):
     return HttpResponse("User view.")
