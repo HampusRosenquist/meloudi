@@ -77,7 +77,7 @@ import { ProfileComponent } from './profile/profile.component';
       httpInterceptor: {
         allowedList: [
           {
-            uri: 'http://127.0.0.1:8000/*',
+            uri: 'http://localhost:8000/*',
             tokenOptions: {
               audience: 'https://meloudi/api'
             }
