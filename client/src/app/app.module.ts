@@ -72,12 +72,17 @@ import { ProfileComponent } from './profile/profile.component';
     AuthModule.forRoot({
       domain: 'dev-yehja2pp.eu.auth0.com',
       clientId: 'JuB0hLExJbYhZmGQW5P8svR4HybgsvaO',
-      clientSecret: 'ks9ppvS5FS2y3Wiq3oe8aBtxY0mZQYE38gbPgwvdMXM3whrnu14Fzz6n6tGONWYi',
       audience: 'https://meloudi/api',
       httpInterceptor: {
         allowedList: [
           {
-            uri: 'http://localhost:8000/*',
+            uri: 'http://localhost:8000/playlists/*',
+            tokenOptions: {
+              audience: 'https://meloudi/api'
+            }
+          },
+          {
+            uri: 'http://localhost:8000/users/*',
             tokenOptions: {
               audience: 'https://meloudi/api'
             }

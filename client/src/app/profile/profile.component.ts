@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -6,12 +6,8 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  accessToken:String = "";
-  metadata = {};
+export class ProfileComponent {
 
-    constructor(public auth: AuthService) { }
-
-  ngOnInit(): void { }
+  constructor(public auth: AuthService) { }
 
 }

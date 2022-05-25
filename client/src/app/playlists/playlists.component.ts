@@ -1,7 +1,7 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { DialogAdd } from '../dialogs/dialog-add';
 import { DialogCreate } from '../dialogs/dialog-create';
@@ -32,11 +32,14 @@ export class PlaylistsComponent implements OnInit {
     private restService: RestService,
     private shareService: ShareService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.loadPlaylists();
+    if (this.auth.isAuthenticated$) {
+      this.loadPlaylists();
+    }
   }
 
   choosePlaylist(playlist: Playlist): void {

@@ -1,4 +1,4 @@
-<div *ngIf="auth.user$ | async as user">
+<ng-container *ngIf="auth.user$ | async as user; else loggedOut">
     <mat-card class="user-card">
         <mat-card-header>
             <img mat-card-avatar [src]="user.picture">
@@ -13,12 +13,8 @@
             </mat-card-subtitle>
         </mat-card-header>
     </mat-card>
-</div>
+</ng-container>
 
-<div *ngIf="!(auth.user$ | async)">
+<ng-template #loggedOut>
     <h3>You need to be logged in for this feature.</h3>
-</div>
-
-<div>
-    <pre>{{ metadata | json }}</pre>
-</div>
+</ng-template>
