@@ -1,11 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from music import serializers, models
-
-def index(request):
-    return HttpResponse("User view.")
-
 
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = models.Artist.objects.all().order_by('name')

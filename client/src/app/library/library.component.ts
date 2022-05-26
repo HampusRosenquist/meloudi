@@ -1,5 +1,4 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-
 import { Artist, Album, Song } from '../types/music';
 import { RestService } from '../services/rest.service';
 import { Rest } from '../types/rest';
@@ -11,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     templateUrl: './library.component.html',
     styleUrls: ['./library.component.css']
 })
+
 export class LibraryComponent implements OnInit {
     artists: Artist[] = [];
     albums: Album[] = [];
@@ -33,34 +33,34 @@ export class LibraryComponent implements OnInit {
         this.loadSongs();
     }
 
-    chooseArtist(artist: string) {
+    chooseArtist(artist: string): void {
         this.chosenAlbums = this.albums.filter(album => album.artist_name === artist);
         this.chosenSongs = this.songs.filter(song => song.artist_name === artist);
     }
 
-    chooseAlbum(album: string) {
+    chooseAlbum(album: string): void {
         this.chosenSongs = this.songs.filter(song => song.album_title === album);
     }
 
-    playSong(song: Song) {
+    playSong(song: Song): void {
         this.chosenSong.emit(song);
     }
 
-    loadArtists() {
-        return this.restService.getArtists().subscribe((data: Rest) => {
+    loadArtists(): void {
+        this.restService.getArtists().subscribe((data: Rest) => {
             this.artists = data.results;
         })
     }
 
-    loadAlbums() {
-        return this.restService.getAlbums().subscribe((data: Rest) => {
+    loadAlbums(): void {
+        this.restService.getAlbums().subscribe((data: Rest) => {
             this.albums = data.results;
             this.chosenAlbums = data.results;
         })
     }
 
-    loadSongs() {
-        return this.restService.getSongs().subscribe((data: Rest) => {
+    loadSongs(): void {
+        this.restService.getSongs().subscribe((data: Rest) => {
             this.songs = data.results;
             this.chosenSongs = data.results;
             this.songsOutput.emit(this.songs);

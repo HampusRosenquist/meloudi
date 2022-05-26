@@ -6,6 +6,7 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent {
 
   constructor(public auth: AuthService) { }

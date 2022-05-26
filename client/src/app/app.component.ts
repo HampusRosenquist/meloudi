@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { QueueComponent } from './queue/queue.component';
 import { Song } from './types/music';
@@ -8,19 +8,19 @@ import { Song } from './types/music';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit, AfterViewInit {
-  title:string = 'Meloudi';
   isPlaying:boolean = false;
   isShuffling:boolean = false;
   isReplaying:boolean = false;
   isWriting:boolean = false;
-  song = <Song>{};
-  songs: Song[] = [];
-  songsPath = "./assets/";
-  audioFile = document.createElement('audio');
-  volume = 1;
+  song:Song = <Song>{};
+  songs:Song[] = [];
+  songsPath:string = "./assets/";
+  audioFile:HTMLAudioElement = document.createElement('audio');
+  volume:number = 1;
 
-  @ViewChild(QueueComponent) private queueComponent!: QueueComponent;
+  @ViewChild(QueueComponent) private queueComponent!:QueueComponent;
 
   ngOnInit(): void {
     this.audioFile.setAttribute('src', this.songsPath + "song.opus");
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.next();
     });
 
+    // Keyboard controls
     document.addEventListener('keyup', (event) => {
       if (!this.isWriting) {
         switch (event.code) {
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }, false);
   }
 
-  applyPlayingState() {
+  applyPlayingState(): void {
     if (this.isPlaying) {
         this.audioFile.play();
         this.audioFile.volume = this.volume;
@@ -62,32 +63,32 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setIsPlaying(isPlaying: boolean) {
+  setIsPlaying(isPlaying: boolean): void {
     this.isPlaying = isPlaying;
     this.applyPlayingState();
   }
 
-  playNow(song: Song) {
+  playNow(song: Song): void {
     this.queueComponent.playNow(song);
   }
 
-  playSong(song: Song) {
+  playSong(song: Song): void {
     this.setIsPlaying(false);
     this.song = song;
     this.audioFile.setAttribute('src', this.songsPath + song.file);
     this.setIsPlaying(true);
   }
 
-  receiveSongs(songs: Song[]) {
+  receiveSongs(songs: Song[]): void {
     this.songs = songs;
   }
 
-  toggleIsPlaying() {
+  toggleIsPlaying(): void {
     this.isPlaying = !this.isPlaying;
     this.applyPlayingState();
   }
 
-  previous() {
+  previous(): void {
     if (this.audioFile.currentTime > 5) {
       this.audioFile.currentTime = 0;
       this.audioFile.play();
@@ -96,11 +97,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  next() {
+  next(): void {
     this.queueComponent.playNext();
   }
 
-  stop() {
+  stop(): void {
     this.setIsPlaying(false);
     this.audioFile.currentTime = 0;
   }
@@ -115,14 +116,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.isReplaying = this.queueComponent.replayOn;
   }
 
-  adjustVolume(event: MatSliderChange) {
+  adjustVolume(event: MatSliderChange): void {
     if (event.value != null) {
       this.volume = event.value / 100
       this.audioFile.volume = this.volume;
     }
   }
 
-  adjustPlaybackPosition(event: MatSliderChange) {
+  adjustPlaybackPosition(event: MatSliderChange): void {
     if (event.value != null) {
       this.audioFile.currentTime = event.value;
     }

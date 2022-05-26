@@ -5,19 +5,18 @@ import { Song } from '../types/music'
 @Injectable({
   providedIn: 'root'
 })
+
 export class ShareService {
-  private song = new Subject<Song>();
+  private queue = new Subject<Song>();
   private dequeueNotification = new Subject<boolean>();
   private clearQueueNotification = new Subject<boolean>();
 
-  constructor() { }
-
   public getEnqueued(): Observable<Song> {
-    return this.song.asObservable();
+    return this.queue.asObservable();
   }
 
   public enqueue(song: Song): void {
-    this.song.next(song);
+    this.queue.next(song);
   }
 
   public getDequeueNotification(): Observable<boolean> {

@@ -9,18 +9,13 @@ import { Playlist, PlaylistWrite } from '../types/user';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RestService {
   private baseUrl = 'http://localhost:8000';
   private artistsUrl = this.baseUrl + '/artists/';
   private songUrl = this.baseUrl + '/songs/';
   private albumUrl = this.baseUrl + '/albums/';
   private playlistsUrl = this.baseUrl + '/playlists/';
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -64,7 +59,6 @@ export class RestService {
       .post<Playlist>(this.playlistsUrl, playlist)
       .pipe(retry(1), catchError(this.errorHandl));
   }
-
 
   private errorHandl(error: any) {
     let errorMessage = '';

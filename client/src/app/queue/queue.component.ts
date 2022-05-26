@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ShareService } from '../services/share.service';
 import { Song } from '../types/music';
@@ -9,15 +9,16 @@ import { Song } from '../types/music';
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.css']
 })
+
 export class QueueComponent implements OnInit {
-  queue: Song[] = [];
-  played: Song[] = [];
-  private playing!: Song;
-  public shuffleOn: boolean = false;
-  public replayOn: boolean = false;
-  private enqueueSubscription!: Subscription;
-  private dequeueSubscription!: Subscription;
-  private clearQueueSubscription!: Subscription;
+  queue:Song[] = [];
+  played:Song[] = [];
+  private playing!:Song;
+  public shuffleOn:boolean = false;
+  public replayOn:boolean = false;
+  private enqueueSubscription!:Subscription;
+  private dequeueSubscription!:Subscription;
+  private clearQueueSubscription!:Subscription;
 
   @Output() nextSong = new EventEmitter<Song>();
 
@@ -96,5 +97,4 @@ export class QueueComponent implements OnInit {
     this.queue.splice(randomIndex, 1);
     return song;
   }
-
 }

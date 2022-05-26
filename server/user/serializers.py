@@ -8,7 +8,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = models.User
         fields = ['id', 'username', 'email']
 
-
 class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
     songs_data = SongSerializer(source='songs', many=True, read_only=True)
     owner_name = serializers.CharField(source='owner.username', read_only=True)

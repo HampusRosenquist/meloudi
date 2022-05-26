@@ -1,5 +1,5 @@
 import { Component, Inject } from "@angular/core";
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { map, Observable, startWith } from "rxjs";
 import { Song } from "../types/music";
@@ -20,8 +20,8 @@ export class DialogAdd {
         this.filteredOptions = this.songForm.valueChanges.pipe(
             startWith(''),
             map(value => (typeof value === 'string' ? value : value.title)),
-            map(title => (title ? this._filter(title) : this.songs.slice())),
-          );
+            map(title => (title ? this._filter(title) : this.songs.slice()))
+        );
     }
 
     displaySong(song: Song): string {

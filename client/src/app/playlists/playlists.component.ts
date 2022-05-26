@@ -17,11 +17,12 @@ import { Playlist, PlaylistWrite } from '../types/user';
   templateUrl: './playlists.component.html',
   styleUrls: ['./playlists.component.css']
 })
+
 export class PlaylistsComponent implements OnInit {
-  playlists: Playlist[] = [];
-  chosenPlaylist = <Playlist>{};
-  chosenSongs: Song[] = [];
-  subscription!: Subscription;
+  playlists:Playlist[] = [];
+  chosenPlaylist:Playlist = <Playlist>{};
+  chosenSongs:Song[] = [];
+  subscription!:Subscription;
 
   @Input() songs: Song[] = [];
   @Output() chosenSong = new EventEmitter<Song>();
@@ -218,5 +219,4 @@ export class PlaylistsComponent implements OnInit {
       this.shareService.enqueue(song);
     });
   }
-
 }
