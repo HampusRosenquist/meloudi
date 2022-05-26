@@ -1,0 +1,69 @@
+<div *ngIf="auth.isAuthenticated$ | async; else loggedOut" class="flex-container">
+    <div>
+        <mat-list class="platlist-list">
+            <h2 class="list-title">Friend's Playlists</h2>
+            <mat-list-item *ngFor="let playlist of playlists">
+                <button
+                mat-stroked-button
+                class="playlist"
+                (click)="choosePlaylist(playlist)"
+                (contextmenu)="enqueuePlaylist(playlist)"
+                (keyup)="false">
+                <p>{{ playlist.title }}</p>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div *ngIf="chosenPlaylist.title">
+        <mat-list class="song-list">
+            <h2 class="list-title">
+                <button 
+                mat-icon-button
+                color="accent"
+                (click)="playChosenPlaylist()"
+                (keyup)="false">
+                    <span class="material-icons">play_arrow</span>
+                </button>
+                Songs
+            </h2>
+            <mat-list-item *ngFor="let song of chosenSongs">
+                <div class="song">
+                    <button
+                    mat-stroked-button
+                    id="song-button"
+                    (click)="playSong(song)"
+                    (contextmenu)="enqueueSong(song)"
+                    (keyup)="false">
+                        <p class="left">{{ song.title }}</p>
+                        <p class="right">{{ song.artist_name }}</p>
+                    </button>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div *ngIf="chosenPlaylist.title">
+        <mat-card class="playlist-card">
+            <mat-card-header>
+                <mat-card-title>
+                    {{ chosenPlaylist.title }}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{ chosenPlaylist.amount }} songs - 
+                    {{ chosenPlaylist.minutes }} min
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    Created on {{ chosenPlaylist.date }}
+                </mat-card-subtitle>
+                <mat-card-subtitle><p>
+                    {{ chosenPlaylist.description }}
+                </p></mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <h3>You need to be logged in for this feature.</h3>
+</ng-template>

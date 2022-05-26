@@ -35,6 +35,7 @@ import { QueueComponent } from './queue/queue.component';
 import { ShareService } from './services/share.service';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FriendsComponent } from './friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProfileComponent } from './profile/profile.component';
     DialogAdd,
     QueueComponent,
     AuthButtonComponent,
-    ProfileComponent
+    ProfileComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

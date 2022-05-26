@@ -56,7 +56,7 @@ export class PlaylistsComponent implements OnInit {
     this.chosenSong.emit(song);
   }
 
-  loadPlaylists() {
+  private loadPlaylists() {
     return this.restService.getPlaylists().subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
     })

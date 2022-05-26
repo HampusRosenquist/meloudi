@@ -77,7 +77,9 @@
     </app-queue>
   </mat-tab>
   <mat-tab label="Friends">
-    <p>Friends!</p>
+    <app-friends>
+      (chosenSong)="playNow($event)"
+    </app-friends>
   </mat-tab>
   <mat-tab label="Profile">
     <app-profile></app-profile>
