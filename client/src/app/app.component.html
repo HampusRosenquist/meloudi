@@ -17,15 +17,20 @@
 
   <span class="flex-expand"></span>
   
-  <span> {{ song.title }} {{ song.title ? ' - ' : ''}} {{ song.artist_name }}</span>
-  <span class="material-icons">music_note</span>
-  <mat-slider
-  min="0"
-  [max]="audioFile.duration"
-  [value]="audioFile.currentTime"
-  aria-label="Track position"
-  (input)="adjustPlaybackPosition($event)">
-  </mat-slider>
+  <div class="mid-top-panel" *ngIf="song.title">
+    <p>
+    <span> {{ song.title }} - {{ song.artist_name }}</span>
+    <br>
+    <mat-slider
+    min="0"
+    [max]="audioFile.duration"
+    [value]="audioFile.currentTime"
+    aria-label="Track position"
+    (input)="adjustPlaybackPosition($event)">
+    </mat-slider>
+    <span id="time"> {{ song.seconds / 60 - (song.seconds % 60)/60 }}:{{ song.seconds % 60 < 10 ? '0' + song.seconds % 60 : song.seconds % 60 }}</span>
+    </p>
+  </div>
 
   <span class="flex-expand"></span>
 

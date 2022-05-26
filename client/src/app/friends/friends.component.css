@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.flex-expand {
+    flex: 1 1 auto;
+}
+
 .playlist {
     width: 15em;
     text-align: left;
@@ -12,7 +16,6 @@
 }
 
 .song {
-    display: flex;
     width: 25em;
 }
 

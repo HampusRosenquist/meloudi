@@ -50,7 +50,7 @@
                 (contextmenu)="enqueueSong(song)"
                 (keyup)="false">
                 <p class="left">{{ song.index }}. {{ song.title }}</p>
-                <p class="right">{{ song.seconds }}</p>
+                <p class="right">{{ song.seconds / 60 - (song.seconds % 60)/60 }}:{{ song.seconds % 60 < 10 ? '0' + song.seconds % 60 : song.seconds % 60 }}</p>
                 </button>
             </mat-list-item>
         </mat-list>

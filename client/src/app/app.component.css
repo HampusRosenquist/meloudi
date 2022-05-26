@@ -10,3 +10,24 @@
 .spacing {
   width: 0.5em;
 }
+
+.mid-top-panel {
+  display: block;
+}
+
+.mid-top-panel p {
+  line-height: 0.15em;
+  text-align: center;
+}
+
+.mid-top-panel mat-slider {
+  height: 0.5em;
+  width: 15em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#time {
+  font-size: 10pt;
+  vertical-align: bottom;
+}
