@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { QueueComponent } from './queue/queue.component';
 import { Song } from './types/music';
@@ -9,7 +9,7 @@ import { Song } from './types/music';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewInit {
   isPlaying:boolean = false;
   isShuffling:boolean = false;
   isReplaying:boolean = false;
@@ -21,10 +21,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   volume:number = 1;
 
   @ViewChild(QueueComponent) private queueComponent!:QueueComponent;
-
-  ngOnInit(): void {
-    this.audioFile.setAttribute('src', this.songsPath + "song.opus");
-  }
 
   ngAfterViewInit(): void {
     this.audioFile.addEventListener('ended', () => {
@@ -55,11 +51,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   applyPlayingState(): void {
-    if (this.isPlaying) {
-        this.audioFile.play();
-        this.audioFile.volume = this.volume;
+    if (this.audioFile.getAttribute('src')) {
+      if (this.isPlaying) {
+          this.audioFile.play();
+          this.audioFile.volume = this.volume;
+      } else {
+        this.audioFile.pause();
+      }
     } else {
-      this.audioFile.pause();
+      this.isPlaying = false;
     }
   }
 
