@@ -16,6 +16,7 @@ export class RestService {
   private songUrl = this.baseUrl + '/songs/';
   private albumUrl = this.baseUrl + '/albums/';
   private playlistsUrl = this.baseUrl + '/playlists/';
+  private friendsUrl = this.baseUrl + '/friends/';
 
   constructor(private http: HttpClient) { }
 
@@ -57,6 +58,12 @@ export class RestService {
   createPlaylist(playlist: PlaylistWrite): Observable<Playlist> {
     return this.http
       .post<Playlist>(this.playlistsUrl, playlist)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  getFriendsPlaylists(): Observable<Playlist[]> {
+    return this.http
+      .get<Playlist[]>(this.friendsUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 

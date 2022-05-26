@@ -1,7 +1,7 @@
 <div *ngIf="auth.isAuthenticated$ | async; else loggedOut" class="flex-container">
     <div>
         <mat-list class="platlist-list">
-            <h2 class="list-title">Friend's Playlists</h2>
+            <h2 class="list-title">Public Playlists</h2>
             <mat-list-item *ngFor="let playlist of playlists">
                 <button
                 mat-stroked-button
@@ -28,17 +28,15 @@
                 Songs
             </h2>
             <mat-list-item *ngFor="let song of chosenSongs">
-                <div class="song">
                     <button
                     mat-stroked-button
-                    id="song-button"
+                    class="song"
                     (click)="playSong(song)"
                     (contextmenu)="enqueueSong(song)"
                     (keyup)="false">
                         <p class="left">{{ song.title }}</p>
                         <p class="right">{{ song.artist_name }}</p>
                     </button>
-                </div>
             </mat-list-item>
         </mat-list>
     </div>

@@ -13,15 +13,16 @@
 
 .song {
     display: flex;
-    width: 30em;
+    width: 25em;
 }
 
 .song-list {
-    width: 30em;
+    width: 25em;
 }
 
 .list-title {
     text-align: center;
+    height: 2em;
 }
 
 .playlist-card {
@@ -34,8 +35,4 @@
 
 .right {
     float: right;
-}
-
-#song-button {
-    width: 25em;
 }

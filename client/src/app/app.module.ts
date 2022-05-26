@@ -88,6 +88,12 @@ import { FriendsComponent } from './friends/friends.component';
             tokenOptions: {
               audience: 'https://meloudi/api'
             }
+          },
+          {
+            uri: 'http://localhost:8000/friends/*',
+            tokenOptions: {
+              audience: 'https://meloudi/api'
+            }
           }
         ]
       }

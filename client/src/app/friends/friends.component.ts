@@ -26,10 +26,11 @@ export class FriendsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadPlaylists();
   }
 
-  private loadPlaylists() { // TODO
-    return this.restService.getPlaylists().subscribe((playlists: Playlist[]) => {
+  private loadPlaylists() {
+    return this.restService.getFriendsPlaylists().subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
     })
   }

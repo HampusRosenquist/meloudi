@@ -31,4 +31,11 @@ class PlaylistViewSet(viewsets.ModelViewSet):
         # The request user is set as owner automatically, so is the date.
         serializer.save(owner=self.request.user, date=date.today())
 
-    
+
+class FriendsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = models.Playlist.objects.filter(is_public=True).exclude(owner=request.user.id)
+        serializer_context = { 'request': request }
+        serializer = serializers.PlaylistSerializer(
+            queryset, context=serializer_context, many=True)
+        return Response(serializer.data)
