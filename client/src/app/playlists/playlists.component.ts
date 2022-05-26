@@ -213,10 +213,12 @@ export class PlaylistsComponent implements OnInit {
   }
 
   playChosenPlaylist(): void {
-    this.playSong(this.chosenSongs[0]);
-    this.shareService.clearQueue();
-    this.chosenSongs.slice(1).forEach(song => {
-      this.shareService.enqueue(song);
-    });
+    if (this.chosenSongs.length) {
+      this.playSong(this.chosenSongs[0]);
+      this.shareService.clearQueue();
+      this.chosenSongs.slice(1).forEach(song => {
+        this.shareService.enqueue(song);
+      });
+    }
   }
 }
