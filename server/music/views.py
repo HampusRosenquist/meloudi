@@ -1,5 +1,9 @@
+from lyricsgenius import Genius
+from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from music import serializers, models
+
+token = "DOllY3IzJYMHhuVG-inxzr_zzeYPBTJrYVzg_tYoYntRV1qqPt-zrf2CVqYD--lByQvsV78wUohJaTYU507Nzg"
 
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = models.Artist.objects.all().order_by('name')
@@ -15,3 +19,14 @@ class SongViewSet(viewsets.ModelViewSet):
     queryset = models.Song.objects.all().order_by('album', 'index')
     serializer_class = serializers.SongSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+def lyrics(request):
+    title = request.GET.get('title', '').replace('..', '').replace('/', '')
+    artist = request.GET.get('artist', '').replace('..', '').replace('/', '')
+
+    genius = Genius(token)
+    lyrics = genius.search_song(title, artist).lyrics
+    print(lyrics)
+    
+    return HttpResponse(lyrics)
+

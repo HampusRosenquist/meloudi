@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ShareService } from '../services/share.service';
 import { Song } from '../types/music';
@@ -10,7 +10,7 @@ import { Song } from '../types/music';
   styleUrls: ['./queue.component.css']
 })
 
-export class QueueComponent implements OnInit {
+export class QueueComponent implements OnInit, OnDestroy {
   queue:Song[] = [];
   played:Song[] = [];
   private playing!:Song;

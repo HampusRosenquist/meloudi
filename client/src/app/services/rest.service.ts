@@ -5,6 +5,7 @@ import { retry, catchError } from 'rxjs/operators';
 
 import { Rest } from '../types/rest'
 import { Playlist, PlaylistWrite } from '../types/user';
+import { Song } from '../types/music';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class RestService {
   private albumUrl = this.baseUrl + '/albums/';
   private playlistsUrl = this.baseUrl + '/playlists/';
   private friendsUrl = this.baseUrl + '/friends/';
+  private lyricsUrl = this.baseUrl + '/lyrics/'
 
   constructor(private http: HttpClient) { }
 
@@ -64,6 +66,13 @@ export class RestService {
   getFriendsPlaylists(): Observable<Playlist[]> {
     return this.http
       .get<Playlist[]>(this.friendsUrl)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  getLyrics(song: Song): Observable<string> {
+    let params = '?title="' + song.title + '"&artist="' + song.artist_name;
+    return this.http
+      .get(this.lyricsUrl + params, {responseType: 'text'})
       .pipe(retry(1), catchError(this.errorHandl));
   }
 

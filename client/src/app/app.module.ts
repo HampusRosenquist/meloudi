@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 
@@ -36,6 +37,7 @@ import { ShareService } from './services/share.service';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FriendsComponent } from './friends/friends.component';
+import { LyricsComponent } from './lyrics/lyrics.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { FriendsComponent } from './friends/friends.component';
     QueueComponent,
     AuthButtonComponent,
     ProfileComponent,
-    FriendsComponent
+    FriendsComponent,
+    LyricsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import { FriendsComponent } from './friends/friends.component';
     MatSnackBarModule,
     MatAutocompleteModule,
     MatTabsModule,
+    MatProgressBarModule,
     DragDropModule,
     AuthModule.forRoot({
       domain: 'dev-yehja2pp.eu.auth0.com',
