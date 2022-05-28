@@ -23,6 +23,7 @@ export class PlaylistsComponent implements OnInit {
   chosenPlaylist:Playlist = <Playlist>{};
   chosenSongs:Song[] = [];
   subscription!:Subscription;
+  loadingData:boolean = true;
 
   @Input() songs: Song[] = [];
   @Output() chosenSong = new EventEmitter<Song>();
@@ -39,6 +40,8 @@ export class PlaylistsComponent implements OnInit {
   ngOnInit(): void {
     if (this.auth.isAuthenticated$) {
       this.loadPlaylists();
+    } else {
+      this.loadingData = false;
     }
   }
 
@@ -59,6 +62,7 @@ export class PlaylistsComponent implements OnInit {
   private loadPlaylists() {
     return this.restService.getPlaylists().subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
+      this.loadingData = false;
     })
   }
 

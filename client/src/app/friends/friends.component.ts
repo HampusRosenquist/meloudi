@@ -15,6 +15,7 @@ export class FriendsComponent implements OnInit {
   playlists:Playlist[] = [];
   chosenPlaylist:Playlist = <Playlist>{};
   chosenSongs:Song[] = [];
+  loadingData:boolean = true;
 
   @Output() chosenSong = new EventEmitter<Song>();
   
@@ -32,6 +33,7 @@ export class FriendsComponent implements OnInit {
   private loadPlaylists() {
     return this.restService.getFriendsPlaylists().subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
+      this.loadingData = false;
     })
   }
 

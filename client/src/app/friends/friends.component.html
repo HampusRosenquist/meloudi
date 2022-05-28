@@ -1,3 +1,4 @@
+<mat-progress-bar mode="query" *ngIf="loadingData"></mat-progress-bar>
 <div *ngIf="auth.isAuthenticated$ | async; else loggedOut" class="flex-container">
     <div>
         <mat-list class="platlist-list">

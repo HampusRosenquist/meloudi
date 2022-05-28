@@ -17,6 +17,7 @@ export class LibraryComponent implements OnInit {
     songs: Song[] = [];
     chosenAlbums: Album[] = [];
     chosenSongs: Song[] = [];
+    loadingData:boolean = true;
 
     @Output() chosenSong = new EventEmitter<Song>();
     @Output() songsOutput = new EventEmitter<Song[]>();
@@ -64,6 +65,7 @@ export class LibraryComponent implements OnInit {
             this.songs = data.results;
             this.chosenSongs = data.results;
             this.songsOutput.emit(this.songs);
+            this.loadingData = false;
         })
     }
 
