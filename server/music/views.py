@@ -19,6 +19,7 @@ class SongViewSet(viewsets.ModelViewSet):
     queryset = models.Song.objects.all().order_by('album', 'index')
     serializer_class = serializers.SongSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    paginator = None
 
 def lyrics(request):
     title = request.GET.get('title', '').replace('..', '').replace('/', '')

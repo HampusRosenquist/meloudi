@@ -61,9 +61,9 @@ export class LibraryComponent implements OnInit {
     }
 
     loadSongs(): void {
-        this.restService.getSongs().subscribe((data: Rest) => {
-            this.songs = data.results;
-            this.chosenSongs = data.results;
+        this.restService.getSongs().subscribe((songs: Song[]) => {
+            this.songs = songs;
+            this.chosenSongs = songs;
             this.songsOutput.emit(this.songs);
             this.loadingData = false;
         })

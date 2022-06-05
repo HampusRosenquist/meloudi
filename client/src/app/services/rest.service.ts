@@ -34,9 +34,9 @@ export class RestService {
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
-  getSongs(): Observable<Rest> {
+  getSongs(): Observable<Song[]> {
     return this.http
-      .get<Rest>(this.songUrl)
+      .get<Song[]>(this.songUrl)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
