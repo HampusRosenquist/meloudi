@@ -38,11 +38,15 @@ export class PlaylistsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.auth.isAuthenticated$) {
-      this.loadPlaylists();
-    } else {
-      this.loadingData = false;
-    }
+    this.auth.isAuthenticated$.subscribe({
+      next: (isAuthenticated) => {
+        if (isAuthenticated) {
+          this.loadPlaylists();
+        } else {
+          this.loadingData = false;
+        }
+      }
+    })
   }
 
   choosePlaylist(playlist: Playlist): void {
@@ -60,6 +64,7 @@ export class PlaylistsComponent implements OnInit {
   }
 
   private loadPlaylists() {
+    console.log("load");
     return this.restService.getPlaylists().subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
       this.loadingData = false;

@@ -27,7 +27,15 @@ export class FriendsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadPlaylists();
+    this.auth.isAuthenticated$.subscribe({
+      next: (isAuthenticated) => {
+        if (isAuthenticated) {
+          this.loadPlaylists();
+        } else {
+          this.loadingData = false;
+        }
+      }
+    })
   }
 
   private loadPlaylists() {
