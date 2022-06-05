@@ -27,7 +27,6 @@ def lyrics(request):
 
     genius = Genius(token)
     lyrics = genius.search_song(title, artist).lyrics
-    print(lyrics)
     
     return HttpResponse(lyrics)
 
