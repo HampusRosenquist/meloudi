@@ -1,15 +1,14 @@
-# TDDD27_2022_Meloudi
-
-## Examination
-[Project demonstration](https://youtu.be/43ALm4jLL80)
-[Code walkthrough](https://youtu.be/cEb9WZUruGc)
+# Meloudi
+Meloudi is a web-based music player created as an exercise for the course Advanced Web Programming, TDDD27, at Linköping University. The course had an emphasis on learning new modern web frameworks and combining them togheter.
 
 ## Function
-I intend to create a web-based music player. Similar to Spotify minus the automated personalization. A service where you can create an account and listen to any music the admin user is hosting. Users can create playlists and may choose to share it with other users. Lyrics for the currently playing song can be displayed, retrieved from a third party API.
+Meloudi is a service where you can create an account and listen to any music the admin user is hosting. Users can create playlists and may choose to share it with other users. Lyrics for the currently playing song can be displayed, retrieved from a third party API.
 
-I am aware that this application can't be published with copyrighted content since it would be illegal file sharing.
+This application can of course not be published with copyrighted content since it would be considered illegal file sharing.
+
 ## Technology
-For lyrics I may use [python-LyricsGenius](https://lyricsgenius.readthedocs.io/en/master/) or better yet, a free API that I can use directly, if I find one.
+Lyrics is retrieved with the help of [python-LyricsGenius](https://lyricsgenius.readthedocs.io/en/master/) from Genius.com.
+
 ### Client
 - Angular 13
 
